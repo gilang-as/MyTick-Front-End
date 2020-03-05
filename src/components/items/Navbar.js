@@ -53,7 +53,7 @@ class Navbar extends Component {
                   <Dropdown.Item href="/my-tickets">My Tickets</Dropdown.Item>
                 </Link>
                 <Link to="/payment">
-                  <Dropdown.Item href="/profile">Payment</Dropdown.Item>
+                  <Dropdown.Item href="/invoice">Invoice</Dropdown.Item>
                 </Link>
                 <Link to="/admin">
                   <Dropdown.Item href="/admin">Admin</Dropdown.Item>
