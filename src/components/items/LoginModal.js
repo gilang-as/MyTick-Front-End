@@ -1,45 +1,46 @@
 import React, { Component } from "react";
-import { Button, Modal, Form } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { Button, Modal, Form, Alert, Spinner } from "react-bootstrap";
 
-class LoginModal extends Component {
+import { actionLogin } from "../../_actions/Auth";
+
+class LoginForm extends Component {
   constructor(props) {
     super(props);
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.state = {
-      email: "",
+      username: "",
       password: "",
       login: false
     };
-
-    this.loginClose = this.loginClose.bind(this);
-    this.loginShow = this.loginShow.bind(this);
   }
-  loginClose() {
+
+  loginClose = () => {
     this.setState({
       login: false
     });
-  }
+  };
 
-  loginShow() {
+  loginShow = () => {
     this.setState({
       login: true
     });
-  }
+  };
 
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
   // on form submit...
-  handleFormSubmit(e) {
+  handleFormSubmit = async e => {
     e.preventDefault();
-    localStorage.setItem("loginForm", JSON.stringify(this.state));
-    this.props.history.push("/dashboard");
-  }
+    await this.props.actionLogin(this.state);
+    if (this.props.auth.authentication) {
+      this.loginClose();
+    }
+  };
+
   render() {
+    const { loading, message, message_status } = this.props.auth;
     return (
       <>
         <Modal
@@ -51,15 +52,22 @@ class LoginModal extends Component {
             <h2>Sign In</h2>
           </Modal.Title>
           <Modal.Body>
+            {message ? (
+              <Alert variant={message_status}>{message}</Alert>
+            ) : (
+              <></>
+            )}
+
             <Form onSubmit={this.handleFormSubmit}>
               <Form.Group className="form-group">
-                <Form.Label>Email</Form.Label>
+                <Form.Label>Username</Form.Label>
                 <Form.Control
                   type="text"
-                  name="email"
+                  name="username"
                   className="form-control"
                   value={this.state.email}
                   onChange={this.handleChange}
+                  required
                 />
               </Form.Group>
               <Form.Group className="form-group">
@@ -70,13 +78,18 @@ class LoginModal extends Component {
                   className="form-control"
                   value={this.state.password}
                   onChange={this.handleChange}
+                  required
                 />
               </Form.Group>
-              <Link to="/dashboard">
+              {loading ? (
+                <Button className="btn btn-primary btn-block" disabled>
+                  <Spinner animation="border" size="sm" variant="light" />
+                </Button>
+              ) : (
                 <Button type="submit" className="btn btn-primary btn-block">
                   Sign In
                 </Button>
-              </Link>
+              )}
             </Form>
           </Modal.Body>
           <Button id="btn-false" variant="secondary" onClick={this.loginClose}>
@@ -91,5 +104,19 @@ class LoginModal extends Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    auth: state.auth
+  };
+};
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actionLogin: data => dispatch(actionLogin(data))
+  };
+}
+
+const LoginModal = connect(mapStateToProps, mapDispatchToProps)(LoginForm);
 
 export default LoginModal;

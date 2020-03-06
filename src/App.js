@@ -1,8 +1,13 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./_assets/css/main.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Container, Nav, Col, Row } from "react-bootstrap";
+
+import { actionMyProfile } from "./_actions/Profile";
+import { actionCheckAuth } from "./_actions/Auth";
 
 import Navbar from "./components/items/Navbar";
 import Footer from "./components/items/Footer";
@@ -17,28 +22,34 @@ import AdminOrderUpdate from "./components/_subAdminPage/AdminOrderUpdate";
 import AdminTicketsList from "./components/_subAdminPage/AdminTicketsList";
 import AdminTicketAdd from "./components/_subAdminPage/AdminTicketAdd";
 import AdminTicketUpdate from "./components/_subAdminPage/AdminTicketUpdate";
-
 import AdminStationsList from "./components/_subAdminPage/AdminStationsList";
 import AdminStationAdd from "./components/_subAdminPage/AdminStationAdd";
 import AdminStationUpdate from "./components/_subAdminPage/AdminStationUpdate";
-
 import AdminTrainsList from "./components/_subAdminPage/AdminTrainsList";
 import AdminTrainAdd from "./components/_subAdminPage/AdminTrainAdd";
 import AdminTrainUpdate from "./components/_subAdminPage/AdminTrainUpdate";
-
 import AdminRoutesList from "./components/_subAdminPage/AdminRoutesList";
 import AdminRouteAdd from "./components/_subAdminPage/AdminRouteAdd";
 import AdminRouteUpdate from "./components/_subAdminPage/AdminRouteUpdate";
-
 import AdminUsersList from "./components/_subAdminPage/AdminUsersList";
 import AdminUserAdd from "./components/_subAdminPage/AdminUserAdd";
 import AdminUserUpdate from "./components/_subAdminPage/AdminUserUpdate";
 
-class App extends Component {
+class Index extends Component {
+  componentDidMount = async () => {
+    await this.props.actionCheckAuth();
+    if (this.props.auth.authStatus) {
+      await this.props.actionMyProfile();
+    }
+    // console.log(this.props.auth.authStatus);
+  };
   render() {
     return (
       <Router>
-        <Navbar />
+        <Navbar
+          auth={this.props.auth.authStatus}
+          profile={this.props.profile.myprofile.myprofile}
+        />
         <Switch>
           <Route path="/admin">
             <Container className="main-container">
@@ -165,5 +176,18 @@ class App extends Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return { profile: state.profile, auth: state.auth };
+};
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actionMyProfile: () => dispatch(actionMyProfile()),
+    actionCheckAuth: () => dispatch(actionCheckAuth())
+  };
+}
+
+const App = connect(mapStateToProps, mapDispatchToProps)(Index);
 
 export default App;

@@ -1,9 +1,17 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+
 import { BrowserRouter as Switch, Link } from "react-router-dom";
 
+import { actionGetTrains } from "../../_actions/Train";
+
 import { Button } from "react-bootstrap";
-class AdminTrainsList extends Component {
+class TrainsList extends Component {
+  componentDidMount() {
+    this.props.actionGetTrains();
+  }
   render() {
+    const { data: trains } = this.props.trains;
     return (
       <div className="table-wrapper">
         <div className="table-title">
@@ -26,25 +34,27 @@ class AdminTrainsList extends Component {
             <tr>
               <th>#</th>
               <th>Name</th>
-              <th>Date Created</th>
-              <th>Ticket</th>
-              <th>Status</th>
+              <th>Category</th>
+              <th>Seats</th>
+              <th>Update</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>Michael Holz</td>
-              <td>04/10/2013</td>
-              <td>Admin</td>
-              <td>
-                <span className="status text-success">&bull;</span> Approved
-              </td>
-              <td>
-                <Button>Details</Button>
-              </td>
-            </tr>
+            {trains.map(function(value, index) {
+              return (
+                <tr>
+                  <td>{index}</td>
+                  <td>{value.name}</td>
+                  <td>{value.category}</td>
+                  <td>{value.seats}</td>
+                  <td>{value.updatedAt}</td>
+                  <td>
+                    <Button>Details</Button>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
         <div className="clearfix">
@@ -91,5 +101,20 @@ class AdminTrainsList extends Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return { trains: state.trains };
+};
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actionGetTrains: () => dispatch(actionGetTrains())
+  };
+}
+
+const AdminTrainsList = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TrainsList);
 
 export default AdminTrainsList;

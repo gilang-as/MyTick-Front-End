@@ -1,0 +1,71 @@
+import { AUTH_LOGIN, AUTH_STATUS } from "../config/Constants";
+
+// Setup Reducer for Redux
+const initialState = {
+  data: [],
+  authentication: false,
+  authStatus: false,
+  loading: false,
+  error: false
+};
+
+const Auth = (state = initialState, action) => {
+  switch (action.type) {
+    case `${AUTH_LOGIN}_PENDING`:
+      return {
+        ...state,
+        loading: true
+      };
+    case `${AUTH_LOGIN}_FULFILLED`:
+      const { token, status, message } = action.payload;
+      if (status) {
+        localStorage.setItem("token", token);
+        return {
+          ...state,
+          token,
+          message,
+          message_status: "success",
+          authentication: true,
+          loading: false
+        };
+      } else {
+        return {
+          ...state,
+          message,
+          message_status: "danger",
+          authentication: false,
+          loading: false
+        };
+      }
+    case `${AUTH_LOGIN}_REJECTED`:
+      return {
+        ...state,
+        loading: false,
+        authentication: false,
+        error: true
+      };
+
+    // AUTH STATUS
+    case `${AUTH_STATUS}_PENDING`:
+      return {
+        ...state,
+        loading: true
+      };
+    case `${AUTH_STATUS}_FULFILLED`:
+      return {
+        ...state,
+        authStatus: action.payload,
+        loading: false
+      };
+    case `${AUTH_STATUS}_REJECTED`:
+      return {
+        ...state,
+        error: true,
+        loading: false
+      };
+    default:
+      return state;
+  }
+};
+
+export default Auth;

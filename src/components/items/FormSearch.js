@@ -171,93 +171,79 @@ class FormSearch extends Component {
                 <tr>
                   <td>1</td>
                   <td>
-                    <p>
-                      <h6>
-                        <b>Argo Parahyangan Excellence</b>
-                      </h6>
-                    </p>
-                    <p>Economy (C)</p>
+                    <h6>
+                      <b>Argo Parahyangan Excellence</b>
+                    </h6>
+                    <br />
+                    Economy (C)
                   </td>
                   <td>
-                    <p>
-                      <h6>
-                        <b>04:00</b>
-                      </h6>
-                    </p>
-                    <p>Bandung</p>
+                    <h6>
+                      <b>04:00</b>
+                    </h6>
+                    <br />
+                    Bandung
                   </td>
                   <td>
-                    <p>
-                      <h6>
-                        <b>08:00</b>
-                      </h6>
-                    </p>
-                    <p>Jakarta</p>
+                    <h6>
+                      <b>08:00</b>
+                    </h6>
+                    <br />
+                    Jakarta
                   </td>
                   <td>
-                    <p>
-                      <h6>
-                        <b>2h 50m</b>
-                      </h6>
-                    </p>
-                    <p>Direct</p>
+                    <h6>
+                      <b>2h 50m</b>
+                    </h6>
+                    <br />
+                    Direct
                   </td>
                   <td>2st</td>
                   <td>
-                    <p>
-                      <h6>
-                        <b>Rp 400.000,-</b>
-                      </h6>
-                    </p>
-                    <p>
-                      <Button>Choose</Button>
-                    </p>
+                    <h6>
+                      <b>Rp 400.000,-</b>
+                    </h6>
+                    <br />
+                    <Button>Choose</Button>
                   </td>
                 </tr>
                 <tr>
                   <td>1</td>
                   <td>
-                    <p>
-                      <h6>
-                        <b>Argo Parahyangan Excellence</b>
-                      </h6>
-                    </p>
-                    <p>Economy (C)</p>
+                    <h6>
+                      <b>Argo Parahyangan Excellence</b>
+                    </h6>
+                    <br />
+                    Economy (C)
                   </td>
                   <td>
-                    <p>
-                      <h6>
-                        <b>04:00</b>
-                      </h6>
-                    </p>
-                    <p>Bandung</p>
+                    <h6>
+                      <b>04:00</b>
+                    </h6>
+                    <br />
+                    Bandung
                   </td>
                   <td>
-                    <p>
-                      <h6>
-                        <b>08:00</b>
-                      </h6>
-                    </p>
-                    <p>Jakarta</p>
+                    <h6>
+                      <b>08:00</b>
+                    </h6>
+                    <br />
+                    Jakarta
                   </td>
                   <td>
-                    <p>
-                      <h6>
-                        <b>2h 50m</b>
-                      </h6>
-                    </p>
-                    <p>Direct</p>
+                    <h6>
+                      <b>2h 50m</b>
+                    </h6>
+                    <br />
+                    Direct
                   </td>
                   <td>2st</td>
                   <td>
-                    <p>
-                      <h6>
-                        <b>Rp 400.000,-</b>
-                      </h6>
-                    </p>
-                    <p>
-                      <Button>Choose</Button>
-                    </p>
+                    <h6>
+                      <b>Rp 400.000,-</b>
+                    </h6>
+                    <br />
+                    <Button>Choose</Button>
                   </td>
                 </tr>
               </tbody>

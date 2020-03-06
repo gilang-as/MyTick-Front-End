@@ -1,9 +1,18 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+
 import { BrowserRouter as Switch, Link } from "react-router-dom";
 
+import { actionGetRoutes } from "../../_actions/Route";
+
+import { SetIDR } from "../../helper/Curency";
 import { Button } from "react-bootstrap";
-class AdminRoutesList extends Component {
+class RoutesList extends Component {
+  componentDidMount() {
+    this.props.actionGetRoutes();
+  }
   render() {
+    const { data: routes } = this.props.routes;
     return (
       <div className="table-wrapper">
         <div className="table-title">
@@ -25,26 +34,32 @@ class AdminRoutesList extends Component {
           <thead>
             <tr>
               <th>#</th>
-              <th>Name</th>
-              <th>Date Created</th>
-              <th>Ticket</th>
-              <th>Status</th>
+              <th>Train</th>
+              <th>Start</th>
+              <th>Destination</th>
+              <th>Start Time</th>
+              <th>Arrived</th>
+              <th>Price</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>Michael Holz</td>
-              <td>04/10/2013</td>
-              <td>Admin</td>
-              <td>
-                <span className="status text-success">&bull;</span> Approved
-              </td>
-              <td>
-                <Button>Details</Button>
-              </td>
-            </tr>
+            {routes.map(function(value, index) {
+              return (
+                <tr>
+                  <td>{index}</td>
+                  <td>{value.train.name}</td>
+                  <td>{value.start.name}</td>
+                  <td>{value.dest.name}</td>
+                  <td>{value.start_time}</td>
+                  <td>{value.arrived}</td>
+                  <td>{SetIDR(value.price)}</td>
+                  <td>
+                    <Button>Details</Button>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
         <div className="clearfix">
@@ -91,5 +106,20 @@ class AdminRoutesList extends Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return { routes: state.routes };
+};
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actionGetRoutes: () => dispatch(actionGetRoutes())
+  };
+}
+
+const AdminRoutesList = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(RoutesList);
 
 export default AdminRoutesList;
