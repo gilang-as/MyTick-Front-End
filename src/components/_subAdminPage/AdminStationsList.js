@@ -1,9 +1,17 @@
 import React, { Component } from "react";
-import { BrowserRouter as Switch, Link } from "react-router-dom";
+import { connect } from "react-redux";
 
+import { BrowserRouter as Switch, Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
-class AdminStationsList extends Component {
+
+import { actionGetStations } from "../../_actions/Station";
+
+class StationsList extends Component {
+  componentDidMount() {
+    this.props.actionGetStations();
+  }
   render() {
+    const { data: stations } = this.props.station;
     return (
       <div className="table-wrapper">
         <div className="table-title">
@@ -26,25 +34,25 @@ class AdminStationsList extends Component {
             <tr>
               <th>#</th>
               <th>Name</th>
-              <th>Date Created</th>
-              <th>Ticket</th>
-              <th>Status</th>
+              <th>Code</th>
+              <th>Area</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>Michael Holz</td>
-              <td>04/10/2013</td>
-              <td>Admin</td>
-              <td>
-                <span className="status text-success">&bull;</span> Approved
-              </td>
-              <td>
-                <Button>Details</Button>
-              </td>
-            </tr>
+            {stations.map(function(value, index) {
+              return (
+                <tr key={index}>
+                  <td>{index}</td>
+                  <td>{value.name}</td>
+                  <td>{value.code}</td>
+                  <td>{value.area}</td>
+                  <td>
+                    <Button>Details</Button>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
         <div className="clearfix">
@@ -91,5 +99,20 @@ class AdminStationsList extends Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return { station: state.station };
+};
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actionGetStations: () => dispatch(actionGetStations())
+  };
+}
+
+const AdminStationsList = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(StationsList);
 
 export default AdminStationsList;

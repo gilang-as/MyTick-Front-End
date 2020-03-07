@@ -6,13 +6,16 @@ import { BrowserRouter as Switch, Link } from "react-router-dom";
 
 import LoginModal from "./LoginModal";
 import RegisterModal from "./RegisterModal";
+import LogOutButton from "./LogOutButton";
 
 class Navigation extends Component {
   constructor(props) {
     super(props);
     this.state = { name: "", level: "" };
   }
-  componentDidMount = async () => {};
+  componentDidMount = () => {
+    // console.log(this.props.profile.myprofile.data.name);
+  };
   render() {
     const auth = this.props.auth;
     return (
@@ -68,10 +71,15 @@ class Navigation extends Component {
                     <Link to="/invoice" className="dropdown-item">
                       Invoice
                     </Link>
-                    <Link to="/admin" className="dropdown-item">
-                      Admin
-                    </Link>
-                    <Dropdown.Item>Sign Out</Dropdown.Item>
+                    {this.props.profile.myprofile &&
+                    this.props.profile.myprofile.data.level === "admin" ? (
+                      <Link to="/admin" className="dropdown-item">
+                        Admin
+                      </Link>
+                    ) : (
+                      <></>
+                    )}
+                    <LogOutButton />
                   </>
                 </Dropdown.Menu>
               </Dropdown>
@@ -87,6 +95,7 @@ class Navigation extends Component {
     );
   }
 }
+
 const mapStateToProps = state => {
   return { profile: state.profile };
 };

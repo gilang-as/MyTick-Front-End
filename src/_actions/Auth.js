@@ -1,4 +1,4 @@
-import { AUTH_LOGIN, AUTH_STATUS } from "../config/Constants";
+import { AUTH_LOGIN, AUTH_STATUS, AUTH_LOGOUT } from "../config/Constants";
 import { API } from "../config/Api";
 
 export const actionCheckAuth = () => {
@@ -21,6 +21,16 @@ export const actionLogin = data => {
     payload: async () => {
       const res = await API.post("/auth/login", data);
       return res.data;
+    }
+  };
+};
+
+export const actionLogout = () => {
+  return {
+    type: AUTH_LOGOUT,
+    payload: () => {
+      localStorage.clear();
+      return false;
     }
   };
 };

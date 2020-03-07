@@ -1,10 +1,17 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+
+import { actionCheckAuth } from "../../_actions/Auth";
+import { actionMyProfile } from "../../_actions/Profile";
+
 import { Button, Modal, Form, Alert, Spinner } from "react-bootstrap";
 
 import { actionLogin } from "../../_actions/Auth";
 
 class LoginForm extends Component {
+  componentDidMount = () => {
+    this.props.actionCheckAuth();
+  };
   constructor(props) {
     super(props);
     this.state = {
@@ -36,6 +43,8 @@ class LoginForm extends Component {
     await this.props.actionLogin(this.state);
     if (this.props.auth.authentication) {
       this.loginClose();
+      await this.props.actionCheckAuth();
+      await this.props.actionMyProfile();
     }
   };
 
@@ -107,13 +116,16 @@ class LoginForm extends Component {
 
 const mapStateToProps = state => {
   return {
-    auth: state.auth
+    auth: state.auth,
+    profile: state.profile
   };
 };
 
 function mapDispatchToProps(dispatch) {
   return {
-    actionLogin: data => dispatch(actionLogin(data))
+    actionLogin: data => dispatch(actionLogin(data)),
+    actionCheckAuth: () => dispatch(actionCheckAuth()),
+    actionMyProfile: () => dispatch(actionMyProfile())
   };
 }
 

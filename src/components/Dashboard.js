@@ -1,11 +1,17 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+
+import { actionCheckAuth } from "../_actions/Auth";
+
 import { Jumbotron, Container, Row, Col } from "react-bootstrap";
 import Carousel from "nuka-carousel";
 
 import FormSearch from "./items/FormSearch";
 
-class Dashboard extends Component {
-  componentDidMount() {}
+class Dash extends Component {
+  componentDidMount = () => {
+    this.props.actionCheckAuth();
+  };
   render() {
     const d = new Date();
     const time = d.getHours();
@@ -17,9 +23,9 @@ class Dashboard extends Component {
               <Col sm={7}>
                 <Jumbotron className="home-banner-text">
                   <h1>
-                    {time > 0 && time < 12
+                    {time < 12
                       ? "Good Morning"
-                      : time > 12 && time < 18
+                      : time < 18
                       ? "Good Afternoon"
                       : "Good Evening"}
                     , Guest!
@@ -54,5 +60,17 @@ class Dashboard extends Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return { auth: state.auth };
+};
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actionCheckAuth: () => dispatch(actionCheckAuth())
+  };
+}
+
+const Dashboard = connect(mapStateToProps, mapDispatchToProps)(Dash);
 
 export default Dashboard;

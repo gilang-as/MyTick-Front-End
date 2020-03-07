@@ -11,7 +11,7 @@ class TrainsList extends Component {
     this.props.actionGetTrains();
   }
   render() {
-    const { data: trains } = this.props.trains;
+    const { data: trains } = this.props.train;
     return (
       <div className="table-wrapper">
         <div className="table-title">
@@ -36,19 +36,17 @@ class TrainsList extends Component {
               <th>Name</th>
               <th>Category</th>
               <th>Seats</th>
-              <th>Update</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
             {trains.map(function(value, index) {
               return (
-                <tr>
+                <tr key={index}>
                   <td>{index}</td>
                   <td>{value.name}</td>
                   <td>{value.category}</td>
                   <td>{value.seats}</td>
-                  <td>{value.updatedAt}</td>
                   <td>
                     <Button>Details</Button>
                   </td>
@@ -103,7 +101,7 @@ class TrainsList extends Component {
 }
 
 const mapStateToProps = state => {
-  return { trains: state.trains };
+  return { train: state.train };
 };
 
 function mapDispatchToProps(dispatch) {

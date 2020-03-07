@@ -1,9 +1,20 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+
 import { BrowserRouter as Switch, Link } from "react-router-dom";
 
 import { Button } from "react-bootstrap";
-class AdminUsersList extends Component {
+
+import { actionGetUsers } from "../../_actions/User";
+
+class UsersList extends Component {
+  componentDidMount() {
+    this.props.actionGetUsers();
+  }
+
   render() {
+    const { data: users } = this.props.user;
+    console.log(users);
     return (
       <div className="table-wrapper">
         <div className="table-title">
@@ -26,25 +37,36 @@ class AdminUsersList extends Component {
             <tr>
               <th>#</th>
               <th>Name</th>
-              <th>Date Created</th>
-              <th>Ticket</th>
+              <th>Email</th>
+              <th>Gender</th>
               <th>Status</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>Michael Holz</td>
-              <td>04/10/2013</td>
-              <td>Admin</td>
-              <td>
-                <span className="status text-success">&bull;</span> Approved
-              </td>
-              <td>
-                <Button>Details</Button>
-              </td>
-            </tr>
+            {users.map(function(value, index) {
+              return (
+                <tr key={index}>
+                  <td>{index}</td>
+                  <td>{value.name}</td>
+                  <td>{value.email}</td>
+                  <td>{value.gender}</td>
+                  {value.level === "admin" ? (
+                    <td>
+                      <span className="status text-success">&bull;</span> Admin
+                    </td>
+                  ) : (
+                    <td>
+                      <span className="status text-warning">&bull;</span> User
+                      Only
+                    </td>
+                  )}
+                  <td>
+                    <Button>Details</Button>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
         <div className="clearfix">
@@ -91,5 +113,17 @@ class AdminUsersList extends Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return { user: state.user };
+};
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actionGetUsers: () => dispatch(actionGetUsers())
+  };
+}
+
+const AdminUsersList = connect(mapStateToProps, mapDispatchToProps)(UsersList);
 
 export default AdminUsersList;

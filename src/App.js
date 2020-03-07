@@ -17,11 +17,6 @@ import MyTicket from "./components/MyTicket";
 import Invoice from "./components/Invoice";
 import AdminDashboard from "./components/_subAdminPage/AdminDashboard";
 import AdminOrdersList from "./components/_subAdminPage/AdminOrdersList";
-import AdminOrderAdd from "./components/_subAdminPage/AdminOrderAdd";
-import AdminOrderUpdate from "./components/_subAdminPage/AdminOrderUpdate";
-import AdminTicketsList from "./components/_subAdminPage/AdminTicketsList";
-import AdminTicketAdd from "./components/_subAdminPage/AdminTicketAdd";
-import AdminTicketUpdate from "./components/_subAdminPage/AdminTicketUpdate";
 import AdminStationsList from "./components/_subAdminPage/AdminStationsList";
 import AdminStationAdd from "./components/_subAdminPage/AdminStationAdd";
 import AdminStationUpdate from "./components/_subAdminPage/AdminStationUpdate";
@@ -44,12 +39,10 @@ class Index extends Component {
     // console.log(this.props.auth.authStatus);
   };
   render() {
+    const auth = this.props.auth.authStatus;
     return (
       <Router>
-        <Navbar
-          auth={this.props.auth.authStatus}
-          profile={this.props.profile.myprofile.myprofile}
-        />
+        <Navbar auth={auth} profile={this.props.profile.myprofile.myprofile} />
         <Switch>
           <Route path="/admin">
             <Container className="main-container">
@@ -64,11 +57,6 @@ class Index extends Component {
                     <Link to="/admin/orders">
                       <Nav.Item className="admin-sidenav-item">
                         <div className="admin-nav-txt">Orders</div>
-                      </Nav.Item>
-                    </Link>
-                    <Link to="/admin/tickets">
-                      <Nav.Item className="admin-sidenav-item">
-                        <div className="admin-nav-txt">Tickets</div>
                       </Nav.Item>
                     </Link>
                     <Link to="/admin/stations">
@@ -130,21 +118,6 @@ class Index extends Component {
                     </Route>
                     <Route path="/admin/stations">
                       <AdminStationsList />
-                    </Route>
-                    <Route path="/admin/ticket-update">
-                      <AdminTicketUpdate />
-                    </Route>
-                    <Route path="/admin/ticket-add">
-                      <AdminTicketAdd />
-                    </Route>
-                    <Route path="/admin/tickets">
-                      <AdminTicketsList />
-                    </Route>
-                    <Route path="/admin/order-update">
-                      <AdminOrderUpdate />
-                    </Route>
-                    <Route path="/admin/order-add">
-                      <AdminOrderAdd />
                     </Route>
                     <Route path="/admin/orders">
                       <AdminOrdersList />

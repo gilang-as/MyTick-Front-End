@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { BrowserRouter as Switch, Link } from "react-router-dom";
 
 import { Button } from "react-bootstrap";
 class AdminOrderList extends Component {
@@ -12,12 +11,6 @@ class AdminOrderList extends Component {
               <h2>
                 Orders <b>List</b>
               </h2>
-            </div>
-            <div className="col-sm-7">
-              <Switch></Switch>
-              <Link to="/admin/order-add" className="btn btn-primary">
-                <span>Add Order</span>
-              </Link>
             </div>
           </div>
         </div>

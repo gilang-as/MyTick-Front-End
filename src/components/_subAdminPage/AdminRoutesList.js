@@ -7,12 +7,13 @@ import { actionGetRoutes } from "../../_actions/Route";
 
 import { SetIDR } from "../../helper/Curency";
 import { Button } from "react-bootstrap";
+
 class RoutesList extends Component {
   componentDidMount() {
     this.props.actionGetRoutes();
   }
   render() {
-    const { data: routes } = this.props.routes;
+    const { data: routes } = this.props.route;
     return (
       <div className="table-wrapper">
         <div className="table-title">
@@ -46,7 +47,7 @@ class RoutesList extends Component {
           <tbody>
             {routes.map(function(value, index) {
               return (
-                <tr>
+                <tr key={index}>
                   <td>{index}</td>
                   <td>{value.train.name}</td>
                   <td>{value.start.name}</td>
@@ -108,7 +109,7 @@ class RoutesList extends Component {
 }
 
 const mapStateToProps = state => {
-  return { routes: state.routes };
+  return { route: state.route };
 };
 
 function mapDispatchToProps(dispatch) {
