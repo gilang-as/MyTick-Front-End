@@ -3,7 +3,13 @@ import { connect } from "react-redux";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./_assets/css/main.css";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect
+} from "react-router-dom";
 import { Container, Nav, Col, Row } from "react-bootstrap";
 
 import { actionMyProfile } from "./_actions/Profile";
@@ -84,46 +90,46 @@ class Index extends Component {
                 <Col sm={9}>
                   <Switch>
                     <Route path="/admin/user-update">
-                      <AdminUserUpdate />
+                      {auth ? <AdminUserUpdate /> : <Redirect to="/" />}
                     </Route>
                     <Route path="/admin/user-add">
-                      <AdminUserAdd />
+                      {auth ? <AdminUserAdd /> : <Redirect to="/" />}
                     </Route>
                     <Route path="/admin/users">
-                      <AdminUsersList />
+                      {auth ? <AdminUsersList /> : <Redirect to="/" />}
                     </Route>
                     <Route path="/admin/route-update">
-                      <AdminRouteUpdate />
+                      {auth ? <AdminRouteUpdate /> : <Redirect to="/" />}
                     </Route>
                     <Route path="/admin/route-add">
-                      <AdminRouteAdd />
+                      {auth ? <AdminRouteAdd /> : <Redirect to="/" />}
                     </Route>
                     <Route path="/admin/routes">
-                      <AdminRoutesList />
+                      {auth ? <AdminRoutesList /> : <Redirect to="/" />}
                     </Route>
                     <Route path="/admin/train-update">
-                      <AdminTrainUpdate />
+                      {auth ? <AdminTrainUpdate /> : <Redirect to="/" />}
                     </Route>
                     <Route path="/admin/train-add">
-                      <AdminTrainAdd />
+                      {auth ? <AdminTrainAdd /> : <Redirect to="/" />}
                     </Route>
                     <Route path="/admin/trains">
-                      <AdminTrainsList />
+                      {auth ? <AdminTrainsList /> : <Redirect to="/" />}
                     </Route>
                     <Route path="/admin/station-update">
-                      <AdminStationUpdate />
+                      {auth ? <AdminStationUpdate /> : <Redirect to="/" />}
                     </Route>
                     <Route path="/admin/station-add">
-                      <AdminStationAdd />
+                      {auth ? <AdminStationAdd /> : <Redirect to="/" />}
                     </Route>
                     <Route path="/admin/stations">
-                      <AdminStationsList />
+                      {auth ? <AdminStationsList /> : <Redirect to="/" />}
                     </Route>
                     <Route path="/admin/orders">
-                      <AdminOrdersList />
+                      {auth ? <AdminOrdersList /> : <Redirect to="/" />}
                     </Route>
                     <Route path="/admin">
-                      <AdminDashboard />
+                      {auth ? <AdminDashboard /> : <Redirect to="/" />}
                     </Route>
                   </Switch>
                 </Col>
@@ -132,10 +138,10 @@ class Index extends Component {
             {/* <Admin /> */}
           </Route>
           <Route path="/invoice">
-            <Invoice />
+            {auth ? <Invoice /> : <Redirect to="/" />}
           </Route>
           <Route path="/my-tickets">
-            <MyTicket />
+            {auth ? <MyTicket /> : <Redirect to="/" />}
           </Route>
           <Route path="/profile">
             <h3>Profile</h3>

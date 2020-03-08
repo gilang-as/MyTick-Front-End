@@ -55,6 +55,8 @@ const Auth = (state = initialState, action) => {
       return {
         ...state,
         authStatus: action.payload,
+        authentication: action.payload,
+        message: "",
         loading: false
       };
     case `${AUTH_STATUS}_REJECTED`:

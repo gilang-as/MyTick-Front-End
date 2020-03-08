@@ -1,5 +1,16 @@
 import React, { Component } from "react";
-
+import {
+  FaHeart,
+  FaHome,
+  FaEnvelope,
+  FaPhone,
+  FaPrint,
+  FaFacebookF,
+  FaTwitter,
+  FaGooglePlus,
+  FaLinkedinIn,
+  FaInstagram
+} from "react-icons/fa";
 class Footer extends Component {
   render() {
     return (
@@ -8,28 +19,11 @@ class Footer extends Component {
         <div>
           <div className="container footer footer-connect">
             <div className="row py-4 d-flex align-items-center">
-              <div className="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
+              <div className="col-md-12 col-lg-12 text-center text-md-left mb-4 mb-md-0">
                 <h6 className="mb-0">
-                  Get connected with us on social networks!
+                  Looking to travel around the world with benefits? Log in or
+                  Register to enjoy
                 </h6>
-              </div>
-
-              <div className="col-md-6 col-lg-7 text-center text-md-right">
-                <a href="/" className="fb-ic">
-                  <i className="fab fa-facebook-f white-text mr-4"> </i>
-                </a>
-                <a href="/" className="tw-ic">
-                  <i className="fab fa-twitter white-text mr-4"> </i>
-                </a>
-                <a href="/" className="gplus-ic">
-                  <i className="fab fa-google-plus-g white-text mr-4"> </i>
-                </a>
-                <a href="/" className="li-ic">
-                  <i className="fab fa-linkedin-in white-text mr-4"> </i>
-                </a>
-                <a href="/" className="ins-ic">
-                  <i className="fab fa-instagram white-text"> </i>
-                </a>
               </div>
             </div>
           </div>
@@ -38,7 +32,9 @@ class Footer extends Component {
         <div className="container text-center text-md-left mt-5">
           <div className="row mt-3">
             <div className="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-              <h6 className="text-uppercase font-weight-bold">Company name</h6>
+              <h6 className="text-uppercase font-weight-bold">
+                My<b>Tick</b>
+              </h6>
               {/* style="width: 60px;" */}
               <hr className="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" />
               <p>
@@ -47,38 +43,36 @@ class Footer extends Component {
                 elit.
               </p>
             </div>
-            <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+            <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4 white">
+              <h6 className="text-uppercase font-weight-bold">
+                About My<b>Tick</b>
+              </h6>
+              {/* style="width: 60px;" */}
+              <hr className="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" />
+              <p>
+                <a href="/page/how-to-book" className="text-white">
+                  How To Book
+                </a>
+              </p>
+              <p>
+                <a href="/page/contact-us" className="text-white">
+                  Contact Us
+                </a>
+              </p>
+              <p>
+                <a href="/page/about-us" className="text-white">
+                  About Us
+                </a>
+              </p>
+            </div>
+            <div className="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
               <h6 className="text-uppercase font-weight-bold">Products</h6>
               {/* style="width: 60px;" */}
               <hr className="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" />
               <p>
-                <a href="/">MDBootstrap</a>
-              </p>
-              <p>
-                <a href="/">MDWordPress</a>
-              </p>
-              <p>
-                <a href="/">BrandFlow</a>
-              </p>
-              <p>
-                <a href="/">Bootstrap Angular</a>
-              </p>
-            </div>
-            <div className="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-              <h6 className="text-uppercase font-weight-bold">Useful links</h6>
-              {/* style="width: 60px;" */}
-              <hr className="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" />
-              <p>
-                <a href="/">Your Account</a>
-              </p>
-              <p>
-                <a href="/">Become an Affiliate</a>
-              </p>
-              <p>
-                <a href="/">Shipping Rates</a>
-              </p>
-              <p>
-                <a href="/">Help</a>
+                <a href="/product/train" className="text-white">
+                  Train
+                </a>
               </p>
             </div>
             <div className="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
@@ -86,23 +80,25 @@ class Footer extends Component {
               {/* style="width: 60px;" */}
               <hr className="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" />
               <p>
-                <i className="fas fa-home mr-3"></i> New York, NY 10012, US
+                <FaHome /> New York, NY 10012, US
               </p>
               <p>
-                <i className="fas fa-envelope mr-3"></i> info@example.com
+                <FaEnvelope /> info@example.com
               </p>
               <p>
-                <i className="fas fa-phone mr-3"></i> + 01 234 567 88
+                <FaPhone /> + 01 234 567 88
               </p>
               <p>
-                <i className="fas fa-print mr-3"></i> + 01 234 567 89
+                <FaPrint /> + 01 234 567 89
               </p>
             </div>
           </div>
         </div>
         <div className="footer-copyright text-center py-3 footer-bottom">
-          © 2020 Copyright:
-          <a href="https://mdbootstrap.com/"> MDBootstrap.com</a>
+          <b>MyTick</b> © 2020 Copyright -{"  "}Make with <FaHeart /> by
+          <a href="https://gilang.dev/" className="text-white">
+            <b> Gilang Adi S </b>
+          </a>
         </div>
       </footer>
     );

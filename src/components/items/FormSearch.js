@@ -60,6 +60,7 @@ class Search extends Component {
   render() {
     const { data: tickets } = this.props.ticket.data;
     const { data: stations } = this.props.station;
+    console.log(this.props.auth);
     return (
       <>
         <Container className="home-form-container">
@@ -264,7 +265,7 @@ class Search extends Component {
 }
 
 const mapStateToProps = state => {
-  return { station: state.station, ticket: state.ticket };
+  return { station: state.station, ticket: state.ticket, auth: state.auth };
 };
 
 function mapDispatchToProps(dispatch) {

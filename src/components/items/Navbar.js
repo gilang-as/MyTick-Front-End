@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { Dropdown } from "react-bootstrap";
+import { Dropdown, Spinner } from "react-bootstrap";
 import { BrowserRouter as Switch, Link } from "react-router-dom";
 
 import LoginModal from "./LoginModal";
@@ -48,7 +48,7 @@ class Navigation extends Component {
               <Dropdown className="nav-item dropdown">
                 <Dropdown.Toggle
                   data-toggle="dropdown"
-                  id="btn-nav"
+                  id="btn-navbar"
                   className="nav-link dropdown-toggle user-action"
                 >
                   <img
@@ -59,7 +59,9 @@ class Navigation extends Component {
                   {this.props.profile.myprofile ? (
                     <>{this.props.profile.myprofile.data.name}</>
                   ) : (
-                    <>Loading</>
+                    <>
+                      <Spinner animation="border" size="sm" variant="light" />
+                    </>
                   )}
                   <b className="caret"></b>
                 </Dropdown.Toggle>

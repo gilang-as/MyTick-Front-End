@@ -23,7 +23,7 @@ class Dash extends Component {
               <Col sm={7}>
                 <Jumbotron className="home-banner-text">
                   <h1>
-                    {time < 12
+                    {time < 11
                       ? "Good Morning"
                       : time < 18
                       ? "Good Afternoon"
