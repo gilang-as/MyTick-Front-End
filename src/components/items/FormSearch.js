@@ -10,22 +10,25 @@ import {
   Form,
   Button
 } from "react-bootstrap";
-import moment from "moment";
+// import moment from "moment";
 import { FaExchangeAlt } from "react-icons/fa";
+import SearchTable from "./SearchTable";
 import { actionGetStations } from "../../_actions/Station";
+import { actionSearchTickets } from "../../_actions/Ticket";
 
 class Search extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      from: "1",
+      starting_point: "1",
       destination: "4",
       date_start: "",
       date_back: "false",
       adult: "1",
       child: "0",
-      status_return: false
+      status_return: false,
+      table: false
     };
   }
 
@@ -38,20 +41,24 @@ class Search extends Component {
   };
 
   switchlah = () => {
-    // console.log(this.state.from, this.state.destination);
+    // console.log(this.state.starting_point, this.state.destination);
     this.setState({
-      from: this.state.destination,
-      destination: this.state.from
+      starting_point: this.state.destination,
+      destination: this.state.starting_point
     });
   };
 
   handleFormSubmit = async e => {
     e.preventDefault();
-    // await this.props.actionLogin(this.state);
-    console.log(this.state);
+    await this.props.actionSearchTickets(this.state);
+    this.setState({
+      table: true
+    });
+    // console.log(this.props.ticket);
   };
 
   render() {
+    const { data: tickets } = this.props.ticket.data;
     const { data: stations } = this.props.station;
     return (
       <>
@@ -63,7 +70,7 @@ class Search extends Component {
                   <Col sm={3}>
                     <Nav variant="pills" className="flex-column">
                       <Nav.Item>
-                        <Nav.Link eventKey="first">Economy</Nav.Link>
+                        <Nav.Link eventKey="first">Train</Nav.Link>
                       </Nav.Item>
                     </Nav>
                   </Col>
@@ -81,9 +88,9 @@ class Search extends Component {
                                     </Form.Label>
                                     <Form.Control
                                       as="select"
-                                      name="from"
-                                      id="from"
-                                      value={this.state.from}
+                                      name="starting_point"
+                                      id="starting_point"
+                                      value={this.state.starting_point}
                                       onChange={this.handleChange}
                                       required
                                     >
@@ -229,115 +236,41 @@ class Search extends Component {
             </Card.Body>
           </Card>
         </Container>
-        <Container className="searching-home">
-          <Card>
-            <table className="table table-striped table-hover">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Train Name</th>
-                  <th>Depart</th>
-                  <th>Arrive</th>
-                  <th>Duration</th>
-                  <th>Transit</th>
-                  <th>Price</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>
-                    <h6>
-                      <b>Argo Parahyangan Excellence</b>
-                    </h6>
-                    <br />
-                    Economy (C)
-                  </td>
-                  <td>
-                    <h6>
-                      <b>04:00</b>
-                    </h6>
-                    <br />
-                    Bandung
-                  </td>
-                  <td>
-                    <h6>
-                      <b>08:00</b>
-                    </h6>
-                    <br />
-                    Jakarta
-                  </td>
-                  <td>
-                    <h6>
-                      <b>2h 50m</b>
-                    </h6>
-                    <br />
-                    Direct
-                  </td>
-                  <td>2st</td>
-                  <td>
-                    <h6>
-                      <b>Rp 400.000,-</b>
-                    </h6>
-                    <br />
-                    <Button>Choose</Button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>1</td>
-                  <td>
-                    <h6>
-                      <b>Argo Parahyangan Excellence</b>
-                    </h6>
-                    <br />
-                    Economy (C)
-                  </td>
-                  <td>
-                    <h6>
-                      <b>04:00</b>
-                    </h6>
-                    <br />
-                    Bandung
-                  </td>
-                  <td>
-                    <h6>
-                      <b>08:00</b>
-                    </h6>
-                    <br />
-                    Jakarta
-                  </td>
-                  <td>
-                    <h6>
-                      <b>2h 50m</b>
-                    </h6>
-                    <br />
-                    Direct
-                  </td>
-                  <td>2st</td>
-                  <td>
-                    <h6>
-                      <b>Rp 400.000,-</b>
-                    </h6>
-                    <br />
-                    <Button>Choose</Button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </Card>
-        </Container>
+        {this.state.table ? (
+          <Container className="searching-home">
+            <Card>
+              <table className="table table-striped table-hover">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Train Name</th>
+                    <th>Depart</th>
+                    <th>Arrive</th>
+                    <th>Duration</th>
+                    <th>Seats</th>
+                    <th>Price</th>
+                  </tr>
+                </thead>
+                <SearchTable tickets={tickets} />
+              </table>
+            </Card>
+          </Container>
+        ) : (
+          <></>
+        )}
       </>
     );
   }
 }
 
 const mapStateToProps = state => {
-  return { station: state.station };
+  return { station: state.station, ticket: state.ticket };
 };
 
 function mapDispatchToProps(dispatch) {
   return {
-    actionGetStations: () => dispatch(actionGetStations())
+    actionGetStations: () => dispatch(actionGetStations()),
+    actionSearchTickets: data => dispatch(actionSearchTickets(data))
   };
 }
 

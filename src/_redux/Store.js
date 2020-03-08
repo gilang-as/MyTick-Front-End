@@ -7,6 +7,7 @@ import train from "../_reducers/Train";
 import route from "../_reducers/Route";
 import user from "../_reducers/User";
 import station from "../_reducers/Station";
+import ticket from "../_reducers/Ticket";
 
 // Global state
 const rootReducers = combineReducers({
@@ -15,7 +16,8 @@ const rootReducers = combineReducers({
   train,
   route,
   user,
-  station
+  station,
+  ticket
 });
 
 // Setup store for Redux

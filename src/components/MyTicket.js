@@ -10,6 +10,8 @@ import {
   Image
 } from "react-bootstrap";
 
+import MyTicketSegment from "./items/MyTicketSegment";
+
 class MyTicket extends Component {
   render() {
     return (
@@ -21,91 +23,8 @@ class MyTicket extends Component {
           <Col md lg="12">
             <Container>
               <Row>
-                <Col md lg="12">
-                  <Card>
-                    <div className="ticket-frame">
-                      <Row>
-                        <Col md lg="8">
-                          <Row>
-                            <Col md lg="3">
-                              <p>
-                                <h3>Argo Wilis</h3>
-                              </p>
-                              <p>
-                                <h6>Eksekutif (P)</h6>
-                              </p>
-                              <p>
-                                <Badge variant="warning">Pending</Badge>
-                              </p>
-                            </Col>
-                            <Col md lg="3">
-                              <p>
-                                <h3>Argo Wilis</h3>
-                              </p>
-                              <p>
-                                <h6>Eksekutif (P)</h6>
-                              </p>
-                              <p>
-                                <h3>Argo Wilis</h3>
-                              </p>
-                              <p>
-                                <h6>Eksekutif (P)</h6>
-                              </p>
-                            </Col>
-                            <Col md lg="6 ">
-                              <p>
-                                <h3>Argo Wilis</h3>
-                              </p>
-                              <p>
-                                <h6>Eksekutif (P)</h6>
-                              </p>
-                              <p>
-                                <h3>Argo Wilis</h3>
-                              </p>
-                              <p>
-                                <h6>Eksekutif (P)</h6>
-                              </p>
-                            </Col>
-                          </Row>
-                        </Col>
-                        <Col md lg="4" className="myticket-title">
-                          <h3>Train</h3>
-                          <small>
-                            <b>Saturday, February 21 2020</b>
-                          </small>
-                        </Col>
-                        <Col md lg="12">
-                          <Row>
-                            <Col md lg="10">
-                              <Table responsive="sm">
-                                <thead>
-                                  <tr>
-                                    <th>No Identity</th>
-                                    <th>Name</th>
-                                    <th>Phone</th>
-                                    <th>Email</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  <tr>
-                                    <td>21331981389</td>
-                                    <td>Joko</td>
-                                    <td>085777899</td>
-                                    <td>joko@email.com</td>
-                                  </tr>
-                                </tbody>
-                              </Table>
-                            </Col>
-                            <Col md lg="2">
-                              <Button className="btn-block">Pay Now</Button>
-                            </Col>
-                          </Row>
-                        </Col>
-                      </Row>
-                    </div>
-                  </Card>
-                </Col>
-                <Col md lg="12">
+                <MyTicketSegment />
+                {/* <Col md lg="12">
                   <Card>
                     <div className="ticket-frame">
                       <Row>
@@ -202,7 +121,7 @@ class MyTicket extends Component {
                       </Row>
                     </div>
                   </Card>
-                </Col>
+                </Col>*/}
               </Row>
             </Container>
           </Col>

@@ -14,3 +14,7 @@ export const GET_ROUTES = "GET_ROUTES";
 export const GET_USERS = "GET_USERS";
 
 export const GET_STATIONS = "GET_STATIONS";
+
+export const GET_SEARCH_TICKETS = "AUTH_SEARCH_TICKETS";
+
+export const UPLOAD_PAYMENT = "UPLOAD_PAYMENT";
