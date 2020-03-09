@@ -6,6 +6,9 @@ import { Button } from "react-bootstrap";
 
 import { actionGetStations } from "../../_actions/Station";
 
+import DeleteButton from "./AdminStationDeleteModal";
+import UpdateButton from "./AdminStationUpdateModal";
+
 class StationsList extends Component {
   componentDidMount() {
     this.props.actionGetStations();
@@ -48,7 +51,8 @@ class StationsList extends Component {
                   <td>{value.code}</td>
                   <td>{value.area}</td>
                   <td>
-                    <Button>Details</Button>
+                    <DeleteButton station_id={value.id} />
+                    <UpdateButton data={value} />
                   </td>
                 </tr>
               );

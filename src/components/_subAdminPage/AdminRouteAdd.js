@@ -62,7 +62,7 @@ class RouteAdd extends Component {
             </div>
           </div>
         </div>
-        <Form>
+        <Form onSubmit={this.handleFormSubmit}>
           <Form.Group>
             <Form.Label>Train</Form.Label>
             <Form.Control
@@ -151,11 +151,7 @@ class RouteAdd extends Component {
             />
           </Form.Group>
           <Form.Group>
-            <Button
-              type="button"
-              onClick={this.handleFormSubmit}
-              id="add-form-button"
-            >
+            <Button type="submit" id="add-form-button">
               Add
             </Button>
           </Form.Group>

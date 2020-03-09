@@ -46,13 +46,13 @@ class StationAdd extends Component {
             </div>
             <div className="col-sm-7">
               <Switch></Switch>
-              <Link to="/admin/trains" className="btn btn-primary">
+              <Link to="/admin/stations" className="btn btn-primary">
                 <span>Back</span>
               </Link>
             </div>
           </div>
         </div>
-        <Form>
+        <Form onSubmit={this.handleFormSubmit}>
           <Form.Group>
             <Form.Label>Name</Form.Label>
             <Form.Control
@@ -87,11 +87,7 @@ class StationAdd extends Component {
             />
           </Form.Group>
           <Form.Group>
-            <Button
-              type="button"
-              onClick={this.handleFormSubmit}
-              id="add-form-button"
-            >
+            <Button type="submit" id="add-form-button">
               Add
             </Button>
           </Form.Group>

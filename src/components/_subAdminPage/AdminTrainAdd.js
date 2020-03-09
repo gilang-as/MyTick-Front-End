@@ -52,7 +52,7 @@ class TrainAdd extends Component {
             </div>
           </div>
         </div>
-        <Form>
+        <Form onSubmit={this.handleFormSubmit}>
           <Form.Group>
             <Form.Label>Name</Form.Label>
             <Form.Control
@@ -91,11 +91,7 @@ class TrainAdd extends Component {
             />
           </Form.Group>
           <Form.Group>
-            <Button
-              type="button"
-              onClick={this.handleFormSubmit}
-              id="add-form-button"
-            >
+            <Button type="submit" id="add-form-button">
               Add
             </Button>
           </Form.Group>
