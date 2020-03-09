@@ -2,15 +2,14 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 // import { actionCheckAuth } from "../../_actions/Auth";
-
+import { actionBuyTicket } from "../../_actions/Ticket";
 import { Button, Modal, Form, Spinner, Row, Col } from "react-bootstrap";
 
 class SearchModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "",
-      password: "",
+      id_ticket: 0,
       login: false,
       adults: [],
       childs: []
@@ -24,6 +23,8 @@ class SearchModal extends Component {
     const tot_child = this.props.child;
     for (let i = 0; i < tot_adult; i++)
       this.setState(prevState => ({
+        id_ticket: this.props.id_ticket,
+        date_start: this.props.date_start,
         adults: [
           ...prevState.adults,
           { adultName: "", adultIdType: "", adultId: "" }
@@ -64,7 +65,9 @@ class SearchModal extends Component {
   cobaLihat = async () => {
     // const data = this.state.adults;
     // data.map();
-    console.log(this.state);
+    await this.props.actionBuyTicket(this.state);
+    // console.log(this.props.date_start);
+    // console.log(this.state);
   };
   // on form submit...
   handleFormSubmit = async e => {
@@ -198,7 +201,7 @@ class SearchModal extends Component {
       station_start,
       arrived,
       station_destination
-    } = this.props.ticket;
+    } = this.props.data_ticket;
     // console.log(this.props.ticket);
     // const { loading, message, message_status } = this.props.auth;
     return (
@@ -219,7 +222,7 @@ class SearchModal extends Component {
             )} */}
             <Row>
               <Col md lg="4">
-                <h1>{tot_adult}</h1>
+                <h1>{train_name}</h1>
                 <br />
                 {train_category}
               </Col>
@@ -267,13 +270,13 @@ class SearchModal extends Component {
 
 const mapStateToProps = state => {
   return {
-    // auth: state.auth
+    ticket: state.ticket
   };
 };
 
 function mapDispatchToProps(dispatch) {
   return {
-    // actionLogin: data => dispatch(actionLogin(data)),
+    actionBuyTicket: data => dispatch(actionBuyTicket(data))
     // actionCheckAuth: () => dispatch(actionCheckAuth())
   };
 }

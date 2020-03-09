@@ -269,6 +269,7 @@ class Search extends Component {
                   tickets={tickets}
                   adult={this.state.adult}
                   child={this.state.child}
+                  date_start={this.state.date_start}
                 />
               </table>
             </Card>

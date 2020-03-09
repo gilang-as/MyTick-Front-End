@@ -18,6 +18,7 @@ class Table extends Component {
     const tickets = this.props.tickets;
     const adult = this.props.adult;
     const child = this.props.child;
+    const date_start = this.props.date_start;
     return (
       <tbody>
         {tickets ? (
@@ -63,7 +64,13 @@ class Table extends Component {
                     <b>{SetIDR(value.price)}</b>
                   </h6>
                   <br />
-                  <FormSearchModal ticket={value} adult={adult} child={child} />
+                  <FormSearchModal
+                    data_ticket={value}
+                    adult={adult}
+                    child={child}
+                    id_ticket={value.id}
+                    date_start={date_start}
+                  />
                 </td>
               </tr>
             );
