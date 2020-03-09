@@ -6,7 +6,9 @@ import { BrowserRouter as Switch, Link } from "react-router-dom";
 import { actionGetRoutes } from "../../_actions/Route";
 
 import { SetIDR } from "../../helper/Curency";
-import { Button } from "react-bootstrap";
+
+import DeleteButton from "./AdminRouteDeleteModal";
+import UpdateButton from "./AdminRouteUpdateModal";
 
 class RoutesList extends Component {
   componentDidMount() {
@@ -56,7 +58,8 @@ class RoutesList extends Component {
                   <td>{value.arrived}</td>
                   <td>{SetIDR(value.price)}</td>
                   <td>
-                    <Button>Details</Button>
+                    <DeleteButton route_id={value.id} />
+                    <UpdateButton data={value} />
                   </td>
                 </tr>
               );
