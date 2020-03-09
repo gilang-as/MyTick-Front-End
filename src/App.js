@@ -90,46 +90,60 @@ class Index extends Component {
                 <Col sm={9}>
                   <Switch>
                     <Route path="/admin/user-update">
-                      {auth ? <AdminUserUpdate /> : <Redirect to="/" />}
+                      {/* {auth ? <AdminUserUpdate /> : <Redirect to="/" />} */}
+                      <AdminUserUpdate />
                     </Route>
                     <Route path="/admin/user-add">
-                      {auth ? <AdminUserAdd /> : <Redirect to="/" />}
+                      {/* {auth ? <AdminUserAdd /> : <Redirect to="/" />} */}
+                      <AdminUserAdd />
                     </Route>
                     <Route path="/admin/users">
-                      {auth ? <AdminUsersList /> : <Redirect to="/" />}
+                      {/* {auth ? <AdminUsersList /> : <Redirect to="/" />} */}
+                      <AdminUsersList />
                     </Route>
                     <Route path="/admin/route-update">
-                      {auth ? <AdminRouteUpdate /> : <Redirect to="/" />}
+                      {/* {auth ? <AdminRouteUpdate /> : <Redirect to="/" />} */}
+                      <AdminRouteUpdate />
                     </Route>
                     <Route path="/admin/route-add">
-                      {auth ? <AdminRouteAdd /> : <Redirect to="/" />}
+                      {/* {auth ? <AdminRouteAdd /> : <Redirect to="/" />} */}
+                      <AdminRouteAdd />
                     </Route>
                     <Route path="/admin/routes">
-                      {auth ? <AdminRoutesList /> : <Redirect to="/" />}
+                      {/* {auth ? <AdminRoutesList /> : <Redirect to="/" />} */}
+                      <AdminRoutesList />
                     </Route>
                     <Route path="/admin/train-update">
-                      {auth ? <AdminTrainUpdate /> : <Redirect to="/" />}
+                      {/* {auth ? <AdminTrainUpdate /> : <Redirect to="/" />} */}
+                      <AdminTrainUpdate />
                     </Route>
                     <Route path="/admin/train-add">
-                      {auth ? <AdminTrainAdd /> : <Redirect to="/" />}
+                      {/* {auth ? <AdminTrainAdd /> : <Redirect to="/" />} */}
+                      <AdminTrainAdd />
                     </Route>
                     <Route path="/admin/trains">
-                      {auth ? <AdminTrainsList /> : <Redirect to="/" />}
+                      {/* {auth ? <AdminTrainsList /> : <Redirect to="/" />} */}
+                      <AdminTrainsList />
                     </Route>
                     <Route path="/admin/station-update">
-                      {auth ? <AdminStationUpdate /> : <Redirect to="/" />}
+                      {/* {auth ? <AdminStationUpdate /> : <Redirect to="/" />} */}
+                      <AdminStationUpdate />
                     </Route>
                     <Route path="/admin/station-add">
-                      {auth ? <AdminStationAdd /> : <Redirect to="/" />}
+                      {/* {auth ? <AdminStationAdd /> : <Redirect to="/" />} */}
+                      <AdminStationAdd />
                     </Route>
                     <Route path="/admin/stations">
-                      {auth ? <AdminStationsList /> : <Redirect to="/" />}
+                      {/* {auth ? <AdminStationsList /> : <Redirect to="/" />} */}
+                      <AdminStationsList />
                     </Route>
                     <Route path="/admin/orders">
-                      {auth ? <AdminOrdersList /> : <Redirect to="/" />}
+                      {/* {auth ? <AdminOrdersList /> : <Redirect to="/" />} */}
+                      <AdminOrdersList />
                     </Route>
                     <Route path="/admin">
-                      {auth ? <AdminDashboard /> : <Redirect to="/" />}
+                      {/* {auth ? <AdminDashboard /> : <Redirect to="/" />} */}
+                      <AdminDashboard />
                     </Route>
                   </Switch>
                 </Col>

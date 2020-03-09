@@ -23,7 +23,7 @@ class TrainsList extends Component {
             </div>
             <div className="col-sm-7">
               <Switch></Switch>
-              <Link to="/admin/ticket-add" className="btn btn-primary">
+              <Link to="/admin/train-add" className="btn btn-primary">
                 <span>Add Train</span>
               </Link>
             </div>

@@ -198,24 +198,37 @@ class Search extends Component {
                                       <Form.Group>
                                         <Form.Label>Adult</Form.Label>
                                         <Form.Control
-                                          type="number"
+                                          as="select"
                                           name="adult"
+                                          id="adult"
                                           value={this.state.adult}
                                           onChange={this.handleChange}
                                           required
-                                        />
+                                        >
+                                          <option value="1">1</option>
+                                          <option value="2">2</option>
+                                          <option value="3">3</option>
+                                          <option value="4">4</option>
+                                        </Form.Control>
                                       </Form.Group>
                                     </Col>
                                     <Col md lg="4">
                                       <Form.Group>
                                         <Form.Label>Child</Form.Label>
                                         <Form.Control
-                                          type="number"
+                                          as="select"
                                           name="child"
+                                          id="child"
                                           value={this.state.child}
                                           onChange={this.handleChange}
                                           required
-                                        />
+                                        >
+                                          <option value="0">0</option>
+                                          <option value="1">1</option>
+                                          <option value="2">2</option>
+                                          <option value="3">3</option>
+                                          <option value="4">4</option>
+                                        </Form.Control>
                                       </Form.Group>
                                     </Col>
                                     <Col md lg="4">
@@ -252,7 +265,11 @@ class Search extends Component {
                     <th>Price</th>
                   </tr>
                 </thead>
-                <SearchTable tickets={tickets} />
+                <SearchTable
+                  tickets={tickets}
+                  adult={this.state.adult}
+                  child={this.state.child}
+                />
               </table>
             </Card>
           </Container>

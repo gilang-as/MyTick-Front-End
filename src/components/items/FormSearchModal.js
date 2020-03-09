@@ -6,17 +6,37 @@ import { connect } from "react-redux";
 import { Button, Modal, Form, Spinner, Row, Col } from "react-bootstrap";
 
 class SearchModal extends Component {
-  componentDidMount = () => {
-    // this.props.actionCheckAuth();
-  };
   constructor(props) {
     super(props);
     this.state = {
       username: "",
       password: "",
-      login: false
+      login: false,
+      adults: [],
+      childs: []
     };
   }
+
+  componentDidMount = () => {
+    // this.props.actionCheckAuth();
+    // console.log(this.state.adult);
+    let tot_adult = this.props.adult;
+    const tot_child = this.props.child;
+    for (let i = 0; i < tot_adult; i++)
+      this.setState(prevState => ({
+        adults: [
+          ...prevState.adults,
+          { adultName: "", adultIdType: "", adultId: "" }
+        ]
+      }));
+    for (let j = 0; j < tot_child; j++)
+      this.setState(prevState => ({
+        childs: [
+          ...prevState.childs,
+          { childName: "", childIdType: "", childId: "" }
+        ]
+      }));
+  };
 
   loginClose = () => {
     this.setState({
@@ -30,10 +50,22 @@ class SearchModal extends Component {
     });
   };
 
-  handleChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
+  handleChangeAdult = e => {
+    let adults = [...this.state.adults];
+    adults[e.target.id][e.target.name] = e.target.value;
+    this.setState({ adults });
+  };
+  handleChangeChild = e => {
+    let childs = [...this.state.childs];
+    childs[e.target.id][e.target.name] = e.target.value;
+    this.setState({ childs });
   };
 
+  cobaLihat = async () => {
+    // const data = this.state.adults;
+    // data.map();
+    console.log(this.state);
+  };
   // on form submit...
   handleFormSubmit = async e => {
     e.preventDefault();
@@ -41,6 +73,124 @@ class SearchModal extends Component {
   };
 
   render() {
+    const items_adults = [];
+    const items_childs = [];
+    let tot_adult = this.props.adult;
+    const tot_child = this.props.child;
+    for (let a = 0; a < tot_adult; a++) {
+      items_adults.push(
+        <Form.Group key={a}>
+          <Form.Label>Adult</Form.Label>
+          <Row>
+            <Col md lg="4">
+              <Form.Group>
+                <Form.Label>Name</Form.Label>
+                <Form.Control
+                  id={`${a}`}
+                  type="text"
+                  // name={`adultName-${a}`}
+                  className="adultName"
+                  name="adultName"
+                  onChange={this.handleChangeAdult}
+                  required
+                />
+              </Form.Group>
+            </Col>
+            <Col md lg="4">
+              <Form.Group>
+                <Form.Label>ID Type</Form.Label>
+                <Form.Control
+                  id={`${a}`}
+                  type="text"
+                  as="select"
+                  name="adultIdType"
+                  className="adultIdType"
+                  onChange={this.handleChangeAdult}
+                  defaultValue="KTP"
+                  required
+                >
+                  <option value="KTP">KTP</option>
+                  <option value="PASSPORT">PASSPORT</option>
+                  <option value="SIM">SIM</option>
+                  <option value="OTHER">OTHER</option>
+                </Form.Control>
+              </Form.Group>
+            </Col>
+            <Col md lg="4">
+              <Form.Group>
+                <Form.Label>ID Type</Form.Label>
+                <Form.Control
+                  id={`${a}`}
+                  type="text"
+                  // name={`adultId-${a}`}
+                  name="adultId"
+                  className="adultId"
+                  onChange={this.handleChangeAdult}
+                  required
+                />
+              </Form.Group>
+            </Col>
+          </Row>
+        </Form.Group>
+      );
+    }
+
+    for (let b = 0; b < tot_child; b++) {
+      items_childs.push(
+        <Form.Group key={b}>
+          <Form.Label>Child</Form.Label>
+          <Row>
+            <Col md lg="4">
+              <Form.Group>
+                <Form.Label>Name</Form.Label>
+                <Form.Control
+                  id={`${b}`}
+                  type="text"
+                  // name={`adultName-${a}`}
+                  className="childName"
+                  name="childName"
+                  onChange={this.handleChangeChild}
+                  required
+                />
+              </Form.Group>
+            </Col>
+            <Col md lg="4">
+              <Form.Group>
+                <Form.Label>ID Type</Form.Label>
+                <Form.Control
+                  id={`${b}`}
+                  type="text"
+                  as="select"
+                  name="childIdType"
+                  className="childIdType"
+                  onChange={this.handleChangeChild}
+                  defaultValue="PASSPORT"
+                  required
+                >
+                  <option value="PASSPORT">PASSPORT</option>
+                  <option value="OTHER">OTHER</option>
+                </Form.Control>
+              </Form.Group>
+            </Col>
+            <Col md lg="4">
+              <Form.Group>
+                <Form.Label>ID Type</Form.Label>
+                <Form.Control
+                  id={`${b}`}
+                  type="text"
+                  // name={`adultId-${a}`}
+                  name="childId"
+                  className="childId"
+                  onChange={this.handleChangeChild}
+                  required
+                />
+              </Form.Group>
+            </Col>
+          </Row>
+        </Form.Group>
+      );
+    }
+
     const {
       train_name,
       train_category,
@@ -49,7 +199,7 @@ class SearchModal extends Component {
       arrived,
       station_destination
     } = this.props.ticket;
-    console.log(this.props.ticket);
+    // console.log(this.props.ticket);
     // const { loading, message, message_status } = this.props.auth;
     return (
       <>
@@ -69,7 +219,7 @@ class SearchModal extends Component {
             )} */}
             <Row>
               <Col md lg="4">
-                <h1>{train_name}</h1>
+                <h1>{tot_adult}</h1>
                 <br />
                 {train_category}
               </Col>
@@ -85,35 +235,19 @@ class SearchModal extends Component {
               </Col>
             </Row>
             <Form onSubmit={this.handleFormSubmit}>
-              <Form.Group className="form-group">
-                <Form.Label>Username</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="username"
-                  className="form-control"
-                  value={this.state.email}
-                  onChange={this.handleChange}
-                  required
-                />
-              </Form.Group>
-              <Form.Group className="form-group">
-                <Form.Label>Password</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="password"
-                  className="form-control"
-                  value={this.state.password}
-                  onChange={this.handleChange}
-                  required
-                />
-              </Form.Group>
+              {items_adults}
+              {items_childs}
               {false ? (
                 <Button className="btn btn-primary btn-block" disabled>
                   <Spinner animation="border" size="sm" variant="light" />
                 </Button>
               ) : (
-                <Button type="submit" className="btn btn-primary btn-block">
-                  Sign In
+                <Button
+                  type="button"
+                  onClick={this.cobaLihat}
+                  className="btn btn-primary btn-block"
+                >
+                  Send
                 </Button>
               )}
             </Form>

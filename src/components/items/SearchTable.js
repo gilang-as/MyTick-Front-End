@@ -16,6 +16,8 @@ import { SetIDR } from "../../helper/Curency";
 class Table extends Component {
   render() {
     const tickets = this.props.tickets;
+    const adult = this.props.adult;
+    const child = this.props.child;
     return (
       <tbody>
         {tickets ? (
@@ -46,7 +48,7 @@ class Table extends Component {
                 </td>
                 <td>
                   <h6>
-                    <b>2h 50m</b>
+                    <b>aaa</b>
                   </h6>
                   <br />
                   Direct
@@ -61,7 +63,7 @@ class Table extends Component {
                     <b>{SetIDR(value.price)}</b>
                   </h6>
                   <br />
-                  <FormSearchModal ticket={value} />
+                  <FormSearchModal ticket={value} adult={adult} child={child} />
                 </td>
               </tr>
             );

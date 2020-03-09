@@ -1,10 +1,41 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { Form, Button } from "react-bootstrap";
-import { BrowserRouter as Switch, Link } from "react-router-dom";
+import { BrowserRouter as Switch, Link, Redirect } from "react-router-dom";
 
-class AdminTrainAdd extends Component {
+import { actionAddTrain } from "../../_actions/Train";
+
+class TrainAdd extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      name: "",
+      category: "Economy",
+      seats: 50
+    };
+  }
+  componentDidMount = () => {};
+
+  handleChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
+  handleFormSubmit = async e => {
+    e.preventDefault();
+    // console.log(this.state);
+    await this.props.actionAddTrain(this.state);
+    // console.log(this.props.route);
+
+    // await this.props.actionLogin(this.state);
+  };
+
   render() {
-    return (
+    const { status } = this.props.train.add_train;
+    // console.log(this.state.route);
+    return status ? (
+      <Redirect to="/admin/trains" />
+    ) : (
       <div className="table-wrapper">
         <div className="table-title">
           <div className="row">
@@ -22,36 +53,49 @@ class AdminTrainAdd extends Component {
           </div>
         </div>
         <Form>
-          <Form.Group controlId="exampleForm.ControlInput1">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control type="email" placeholder="name@example.com" />
+          <Form.Group>
+            <Form.Label>Name</Form.Label>
+            <Form.Control
+              type="text"
+              name="name"
+              id="name"
+              onChange={this.handleChange}
+              value={this.state.name}
+              required
+            />
           </Form.Group>
-          <Form.Group controlId="exampleForm.ControlSelect1">
-            <Form.Label>Example select</Form.Label>
-            <Form.Control as="select">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
+          <Form.Group>
+            <Form.Label>Category</Form.Label>
+            <Form.Control
+              as="select"
+              name="category"
+              id="category"
+              onChange={this.handleChange}
+              value={this.state.category}
+              required
+            >
+              <option value="Executive">Executive</option>
+              <option value="Business">Business</option>
+              <option value="Economy">Economy</option>
             </Form.Control>
           </Form.Group>
-          <Form.Group controlId="exampleForm.ControlSelect2">
-            <Form.Label>Example multiple select</Form.Label>
-            <Form.Control as="select" multiple>
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-            </Form.Control>
+          <Form.Group>
+            <Form.Label>Seats</Form.Label>
+            <Form.Control
+              type="text"
+              name="seats"
+              id="seats"
+              onChange={this.handleChange}
+              value={this.state.seats}
+              required
+            />
           </Form.Group>
-          <Form.Group controlId="exampleForm.ControlTextarea1">
-            <Form.Label>Example textarea</Form.Label>
-            <Form.Control as="textarea" rows="3" />
-          </Form.Group>
-          <Form.Group controlId="Button">
-            <Button type="submit" id="add-form-button">
+          <Form.Group>
+            <Button
+              type="button"
+              onClick={this.handleFormSubmit}
+              id="add-form-button"
+            >
               Add
             </Button>
           </Form.Group>
@@ -60,5 +104,17 @@ class AdminTrainAdd extends Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return { train: state.train };
+};
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actionAddTrain: data => dispatch(actionAddTrain(data))
+  };
+}
+
+const AdminTrainAdd = connect(mapStateToProps, mapDispatchToProps)(TrainAdd);
 
 export default AdminTrainAdd;
