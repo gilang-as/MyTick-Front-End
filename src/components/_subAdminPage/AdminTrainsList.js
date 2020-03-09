@@ -6,6 +6,10 @@ import { BrowserRouter as Switch, Link } from "react-router-dom";
 import { actionGetTrains } from "../../_actions/Train";
 
 import { Button } from "react-bootstrap";
+
+import DeleteButton from "./AdminTrainDeleteModal";
+import UpdateButton from "./AdminTrainUpdateModal";
+
 class TrainsList extends Component {
   componentDidMount() {
     this.props.actionGetTrains();
@@ -48,7 +52,8 @@ class TrainsList extends Component {
                   <td>{value.category}</td>
                   <td>{value.seats}</td>
                   <td>
-                    <Button>Details</Button>
+                    <DeleteButton train_id={value.id} />
+                    <UpdateButton data={value} />
                   </td>
                 </tr>
               );
