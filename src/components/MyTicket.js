@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import {
   Container,
   Row,
@@ -9,11 +10,16 @@ import {
   Button,
   Image
 } from "react-bootstrap";
+import { actionGetMyTickets } from "../_actions/Ticket";
 
 import MyTicketSegment from "./items/MyTicketSegment";
 
 class MyTicket extends Component {
+  componentDidMount() {
+    this.props.actionGetMyTickets();
+  }
   render() {
+    const { data: my_tickets } = this.props.ticket.my_tickets;
     return (
       <Container className="main-container">
         <div>
@@ -130,5 +136,16 @@ class MyTicket extends Component {
     );
   }
 }
+const mapStateToProps = state => {
+  return { ticket: state.ticket };
+};
 
-export default MyTicket;
+function mapDispatchToProps(dispatch) {
+  return {
+    actionGetMyTickets: () => dispatch(actionGetMyTickets())
+  };
+}
+
+const Ticket = connect(mapStateToProps, mapDispatchToProps)(MyTicket);
+
+export default Ticket;

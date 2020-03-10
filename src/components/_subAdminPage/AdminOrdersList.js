@@ -1,8 +1,17 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
+import { actionGetTransactions } from "../../_actions/Transaction";
 import { Button } from "react-bootstrap";
-class AdminOrderList extends Component {
+import { SetIDR } from "../../helper/Curency";
+import AdminOrderStatusSelect from "./AdminOrderStatusSelect";
+class OrdersList extends Component {
+  componentDidMount() {
+    this.props.actionGetTransactions();
+  }
   render() {
+    const { data: transactions } = this.props.transaction;
+    console.log(transactions);
     return (
       <div className="table-wrapper">
         <div className="table-title">
@@ -20,24 +29,27 @@ class AdminOrderList extends Component {
               <th>#</th>
               <th>Name</th>
               <th>Date Created</th>
-              <th>Ticket</th>
+              <th>Price</th>
               <th>Status</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>Michael Holz</td>
-              <td>04/10/2013</td>
-              <td>Admin</td>
-              <td>
-                <span className="status text-success">&bull;</span> Approved
-              </td>
-              <td>
-                <Button>Details</Button>
-              </td>
-            </tr>
+            {transactions.map(function(value, index) {
+              return (
+                <tr key={index}>
+                  <td>{index}</td>
+                  <td>{value.user.name}</td>
+                  <td>{value.date}</td>
+                  <td>{SetIDR(value.price)}</td>
+                  <td>{value.status}</td>
+                  <td>
+                    {" "}
+                    <AdminOrderStatusSelect data={value.id} />
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
         <div className="clearfix">
@@ -84,5 +96,17 @@ class AdminOrderList extends Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return { transaction: state.transaction };
+};
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actionGetTransactions: () => dispatch(actionGetTransactions())
+  };
+}
+
+const AdminOrderList = connect(mapStateToProps, mapDispatchToProps)(OrdersList);
 
 export default AdminOrderList;

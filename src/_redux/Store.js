@@ -8,6 +8,7 @@ import route from "../_reducers/Route";
 import user from "../_reducers/User";
 import station from "../_reducers/Station";
 import ticket from "../_reducers/Ticket";
+import transaction from "../_reducers/Transaction";
 
 // Global state
 const rootReducers = combineReducers({
@@ -17,7 +18,8 @@ const rootReducers = combineReducers({
   route,
   user,
   station,
-  ticket
+  ticket,
+  transaction
 });
 
 // Setup store for Redux

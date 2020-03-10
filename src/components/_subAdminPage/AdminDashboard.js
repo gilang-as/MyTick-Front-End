@@ -6,45 +6,10 @@ class AdminDashboard extends Component {
     return (
       <Container fluid>
         <Row>
-          <Col md lg="4">
+          <Col md lg="12">
             <Card>
-              <Container>
-                <h3>Lalala</h3>
-              </Container>
-            </Card>
-          </Col>
-          <Col md lg="4">
-            <Card>
-              <Container>
-                <h3>Lalala</h3>
-              </Container>
-            </Card>
-          </Col>
-          <Col md lg="4">
-            <Card>
-              <Container>
-                <h3>Lalala</h3>
-              </Container>
-            </Card>
-          </Col>
-          <Col md lg="4">
-            <Card>
-              <Container>
-                <h3>Lalala</h3>
-              </Container>
-            </Card>
-          </Col>
-          <Col md lg="4">
-            <Card>
-              <Container>
-                <h3>Lalala</h3>
-              </Container>
-            </Card>
-          </Col>
-          <Col md lg="4">
-            <Card>
-              <Container>
-                <h3>Lalala</h3>
+              <Container className="text-center">
+                <h2>Welcome Admin</h2>
               </Container>
             </Card>
           </Col>
