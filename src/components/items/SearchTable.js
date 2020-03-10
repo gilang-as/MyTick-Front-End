@@ -1,31 +1,27 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
-import {
-  Container,
-  Row,
-  Col,
-  Card,
-  Tab,
-  Nav,
-  Form,
-  Button
-} from "react-bootstrap";
+import { actionCheckAuth } from "../../_actions/Auth";
+import { Button } from "react-bootstrap";
 import FormSearchModal from "./FormSearchModal";
 import { SetIDR } from "../../helper/Curency";
 
 class Table extends Component {
+  componentDidMount = () => {
+    this.props.actionCheckAuth();
+  };
   render() {
     const tickets = this.props.tickets;
     const adult = this.props.adult;
     const child = this.props.child;
     const date_start = this.props.date_start;
+    const auth = this.props.auth;
     return (
       <tbody>
         {tickets ? (
           tickets.map(function(value, index) {
             return (
               <tr key={index}>
-                <td>{index}</td>
                 <td>
                   <h6>
                     <b>{value.train_name}</b>
@@ -48,13 +44,6 @@ class Table extends Component {
                   {value.station_destination}
                 </td>
                 <td>
-                  <h6>
-                    <b>aaa</b>
-                  </h6>
-                  <br />
-                  Direct
-                </td>
-                <td>
                   {value.remaining_seats
                     ? value.remaining_seats
                     : value.train_seats}
@@ -64,13 +53,17 @@ class Table extends Component {
                     <b>{SetIDR(value.price)}</b>
                   </h6>
                   <br />
-                  <FormSearchModal
-                    data_ticket={value}
-                    adult={adult}
-                    child={child}
-                    id_ticket={value.id}
-                    date_start={date_start}
-                  />
+                  {auth ? (
+                    <FormSearchModal
+                      data_ticket={value}
+                      adult={adult}
+                      child={child}
+                      id_ticket={value.id}
+                      date_start={date_start}
+                    />
+                  ) : (
+                    <></>
+                  )}
                 </td>
               </tr>
             );
@@ -83,4 +76,16 @@ class Table extends Component {
   }
 }
 
-export default Table;
+const mapStateToProps = state => {
+  return { auth: state.auth };
+};
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actionCheckAuth: () => dispatch(actionCheckAuth())
+  };
+}
+
+const SearchTable = connect(mapStateToProps, mapDispatchToProps)(Table);
+
+export default SearchTable;

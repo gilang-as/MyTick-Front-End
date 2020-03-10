@@ -11,6 +11,7 @@ class SearchModal extends Component {
     this.state = {
       id_ticket: 0,
       login: false,
+      total: 0,
       adults: [],
       childs: []
     };
@@ -21,21 +22,16 @@ class SearchModal extends Component {
     // console.log(this.state.adult);
     let tot_adult = this.props.adult;
     const tot_child = this.props.child;
+    this.setState({ total: tot_adult });
     for (let i = 0; i < tot_adult; i++)
       this.setState(prevState => ({
         id_ticket: this.props.id_ticket,
         date_start: this.props.date_start,
-        adults: [
-          ...prevState.adults,
-          { adultName: "", adultIdType: "", adultId: "" }
-        ]
+        adults: [...prevState.adults, { name: "", category: "", identity: "" }]
       }));
     for (let j = 0; j < tot_child; j++)
       this.setState(prevState => ({
-        childs: [
-          ...prevState.childs,
-          { childName: "", childIdType: "", childId: "" }
-        ]
+        childs: [...prevState.childs, { name: "", category: "", identity: "" }]
       }));
   };
 
@@ -63,11 +59,10 @@ class SearchModal extends Component {
   };
 
   cobaLihat = async () => {
-    // const data = this.state.adults;
-    // data.map();
     await this.props.actionBuyTicket(this.state);
-    // console.log(this.props.date_start);
-    // console.log(this.state);
+    if (this.props.ticket.buy_ticket.status) {
+      this.loginClose();
+    }
   };
   // on form submit...
   handleFormSubmit = async e => {
@@ -91,9 +86,8 @@ class SearchModal extends Component {
                 <Form.Control
                   id={`${a}`}
                   type="text"
-                  // name={`adultName-${a}`}
-                  className="adultName"
-                  name="adultName"
+                  className="name"
+                  name="name"
                   onChange={this.handleChangeAdult}
                   required
                 />
@@ -106,8 +100,8 @@ class SearchModal extends Component {
                   id={`${a}`}
                   type="text"
                   as="select"
-                  name="adultIdType"
-                  className="adultIdType"
+                  name="category"
+                  className="category"
                   onChange={this.handleChangeAdult}
                   defaultValue="KTP"
                   required
@@ -126,8 +120,8 @@ class SearchModal extends Component {
                   id={`${a}`}
                   type="text"
                   // name={`adultId-${a}`}
-                  name="adultId"
-                  className="adultId"
+                  name="identity"
+                  className="identity"
                   onChange={this.handleChangeAdult}
                   required
                 />
@@ -149,9 +143,8 @@ class SearchModal extends Component {
                 <Form.Control
                   id={`${b}`}
                   type="text"
-                  // name={`adultName-${a}`}
-                  className="childName"
-                  name="childName"
+                  className="name"
+                  name="name"
                   onChange={this.handleChangeChild}
                   required
                 />
@@ -164,8 +157,8 @@ class SearchModal extends Component {
                   id={`${b}`}
                   type="text"
                   as="select"
-                  name="childIdType"
-                  className="childIdType"
+                  name="category"
+                  className="category"
                   onChange={this.handleChangeChild}
                   defaultValue="PASSPORT"
                   required
@@ -182,8 +175,8 @@ class SearchModal extends Component {
                   id={`${b}`}
                   type="text"
                   // name={`adultId-${a}`}
-                  name="childId"
-                  className="childId"
+                  name="identity"
+                  className="identity"
                   onChange={this.handleChangeChild}
                   required
                 />

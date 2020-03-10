@@ -256,11 +256,9 @@ class Search extends Component {
               <table className="table table-striped table-hover">
                 <thead>
                   <tr>
-                    <th>#</th>
                     <th>Train Name</th>
                     <th>Depart</th>
                     <th>Arrive</th>
-                    <th>Duration</th>
                     <th>Seats</th>
                     <th>Price</th>
                   </tr>
