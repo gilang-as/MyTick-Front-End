@@ -9,8 +9,13 @@ class RegisterModal extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.state = {
+      name: "",
+      username: "",
       email: "",
       password: "",
+      gender: "",
+      phone: "",
+      address: "",
       login: false
     };
 
@@ -53,9 +58,29 @@ class RegisterModal extends Component {
           <Modal.Body>
             <Form onSubmit={this.handleFormSubmit}>
               <Form.Group className="form-group">
-                <Form.Label>Email</Form.Label>
+                <Form.Label>Name</Form.Label>
                 <Form.Control
                   type="text"
+                  name="name"
+                  className="form-control"
+                  value={this.state.name}
+                  onChange={this.handleChange}
+                />
+              </Form.Group>
+              <Form.Group className="form-group">
+                <Form.Label>Username</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="username"
+                  className="form-control"
+                  value={this.state.username}
+                  onChange={this.handleChange}
+                />
+              </Form.Group>
+              <Form.Group className="form-group">
+                <Form.Label>Email</Form.Label>
+                <Form.Control
+                  type="email"
                   name="email"
                   className="form-control"
                   value={this.state.email}
@@ -72,11 +97,39 @@ class RegisterModal extends Component {
                   onChange={this.handleChange}
                 />
               </Form.Group>
-              <Link to="/dashboard">
-                <Button type="submit" className="btn btn-primary btn-block">
-                  Sign Up
-                </Button>
-              </Link>
+              <Form.Group className="form-group">
+                <Form.Label>Gender</Form.Label>
+                {/* <Form.Control
+                  type="text"
+                  name="email"
+                  className="form-control"
+                  value={this.state.email}
+                  onChange={this.handleChange}
+                /> */}
+              </Form.Group>
+              <Form.Group className="form-group">
+                <Form.Label>Phone</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="phone"
+                  className="form-control"
+                  value={this.state.phone}
+                  onChange={this.handleChange}
+                />
+              </Form.Group>
+              <Form.Group className="form-group">
+                <Form.Label>Address</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="address"
+                  className="form-control"
+                  value={this.state.address}
+                  onChange={this.handleChange}
+                />
+              </Form.Group>
+              <Button type="submit" className="btn btn-primary btn-block">
+                Sign Up
+              </Button>
             </Form>
           </Modal.Body>
           <Button id="btn-false" variant="secondary" onClick={this.loginClose}>
