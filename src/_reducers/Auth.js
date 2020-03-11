@@ -1,4 +1,9 @@
-import { AUTH_LOGIN, AUTH_STATUS, AUTH_LOGOUT } from "../config/Constants";
+import {
+  AUTH_LOGIN,
+  AUTH_STATUS,
+  AUTH_LOGOUT,
+  AUTH_REGISTER
+} from "../config/Constants";
 
 // Setup Reducer for Redux
 const initialState = {
@@ -11,11 +16,13 @@ const initialState = {
 
 const Auth = (state = initialState, action) => {
   switch (action.type) {
+    case `${AUTH_REGISTER}_PENDING`:
     case `${AUTH_LOGIN}_PENDING`:
       return {
         ...state,
         loading: true
       };
+    case `${AUTH_REGISTER}_FULFILLED`:
     case `${AUTH_LOGIN}_FULFILLED`:
       const { token, status, message } = action.payload;
       if (status) {
@@ -37,6 +44,7 @@ const Auth = (state = initialState, action) => {
           loading: false
         };
       }
+    case `${AUTH_REGISTER}_REJECTED`:
     case `${AUTH_LOGIN}_REJECTED`:
       return {
         ...state,

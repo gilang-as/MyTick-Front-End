@@ -195,6 +195,7 @@ body {
 }
 .home-form-container {
   margin-top: -20px;
+  padding-bottom: 25px;
 }
 /* .slider-home {
   max-height: 300px;
@@ -763,4 +764,8 @@ table.table .avatar {
   font-weight: 600;
   text-transform: capitalize;
   text-align: center;
+}
+.modal-title {
+  text-align: center;
+  margin: 25px;
 }

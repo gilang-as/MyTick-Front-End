@@ -49,7 +49,7 @@ class RoutesList extends Component {
           <tbody>
             {routes.map(function(value, index) {
               return (
-                <tr key={index}>
+                <tr key={(index = index + 1)}>
                   <td>{index}</td>
                   <td>{value.train.name}</td>
                   <td>{value.start.name}</td>
@@ -66,7 +66,7 @@ class RoutesList extends Component {
             })}
           </tbody>
         </table>
-        <div className="clearfix">
+        {/* <div className="clearfix">
           <div className="hint-text">
             Showing <b>5</b> out of <b>25</b> entries
           </div>
@@ -105,7 +105,7 @@ class RoutesList extends Component {
               </a>
             </li>
           </ul>
-        </div>
+        </div> */}
       </div>
     );
   }

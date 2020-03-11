@@ -1,15 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import {
-  Container,
-  Row,
-  Col,
-  Card,
-  Badge,
-  Table,
-  Button,
-  Image
-} from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import { actionGetMyTickets } from "../_actions/Ticket";
 
 import MyTicketSegment from "./items/MyTicketSegment";
@@ -19,7 +10,7 @@ class MyTicket extends Component {
     this.props.actionGetMyTickets();
   }
   render() {
-    const { data: my_tickets } = this.props.ticket.my_tickets;
+    const { data: my_tickets, status } = this.props.ticket.my_tickets;
     return (
       <Container className="main-container">
         <div>
@@ -27,10 +18,19 @@ class MyTicket extends Component {
         </div>
         <Row>
           <Col md lg="12">
-            <Container>
-              <Row>
-                <MyTicketSegment />
-                {/* <Col md lg="12">
+            {this.props.ticket.my_tickets.data ? (
+              <Container>
+                <Row>
+                  {my_tickets.map(function(value, index) {
+                    return <MyTicketSegment key={index} data={value} />;
+                  })}
+                </Row>
+              </Container>
+            ) : (
+              <>LOADING</>
+            )}
+          </Col>
+          {/* <Col md lg="12">
                   <Card>
                     <div className="ticket-frame">
                       <Row>
@@ -128,9 +128,6 @@ class MyTicket extends Component {
                     </div>
                   </Card>
                 </Col>*/}
-              </Row>
-            </Container>
-          </Col>
         </Row>
       </Container>
     );

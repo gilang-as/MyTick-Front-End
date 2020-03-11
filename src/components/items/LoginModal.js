@@ -1,17 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { actionCheckAuth } from "../../_actions/Auth";
+import { actionCheckAuth, actionLogin } from "../../_actions/Auth";
 import { actionMyProfile } from "../../_actions/Profile";
 
 import { Button, Modal, Form, Alert, Spinner } from "react-bootstrap";
 
-import { actionLogin } from "../../_actions/Auth";
-
 class LoginForm extends Component {
-  componentDidMount = () => {
-    this.props.actionCheckAuth();
-  };
   constructor(props) {
     super(props);
     this.state = {
@@ -20,6 +15,9 @@ class LoginForm extends Component {
       login: false
     };
   }
+  componentDidMount = () => {
+    this.props.actionCheckAuth();
+  };
 
   loginClose = () => {
     this.setState({
@@ -57,7 +55,7 @@ class LoginForm extends Component {
           onHide={this.loginClose}
           animation={false}
         >
-          <Modal.Title id="txt-form">
+          <Modal.Title id="txt-form" className="modal-title">
             <h2>Sign In</h2>
           </Modal.Title>
           <Modal.Body>

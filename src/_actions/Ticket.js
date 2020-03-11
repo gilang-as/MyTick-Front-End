@@ -29,7 +29,9 @@ export const actionGetMyTickets = () => {
   return {
     type: GET_MY_TICKET,
     payload: async () => {
-      const res = await API.get(`/my-orders`);
+      const token = localStorage.getItem("token");
+      setAuthToken(token);
+      const res = await API.get(`/my-tickets`);
       return res.data;
     }
   };

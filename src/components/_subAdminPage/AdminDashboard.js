@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, Card, Row, Col } from "react-bootstrap";
+import { Container, Card, Row, Col, Alert } from "react-bootstrap";
 
 class AdminDashboard extends Component {
   render() {
@@ -7,11 +7,18 @@ class AdminDashboard extends Component {
       <Container fluid>
         <Row>
           <Col md lg="12">
-            <Card>
-              <Container className="text-center">
-                <h2>Welcome Admin</h2>
-              </Container>
-            </Card>
+            <Container className="text-center">
+              <Alert variant="success">
+                <Alert.Heading>
+                  Welcome <i>"Admin"</i> to Dashboard!
+                </Alert.Heading>
+                <p>
+                  You can anymore in dashboard,
+                  <br />
+                  Add, Delete, Update and read data. <br />
+                </p>
+              </Alert>
+            </Container>
           </Col>
         </Row>
       </Container>

@@ -5,8 +5,6 @@ import { BrowserRouter as Switch, Link } from "react-router-dom";
 
 import { actionGetTrains } from "../../_actions/Train";
 
-import { Button } from "react-bootstrap";
-
 import DeleteButton from "./AdminTrainDeleteModal";
 import UpdateButton from "./AdminTrainUpdateModal";
 
@@ -46,7 +44,7 @@ class TrainsList extends Component {
           <tbody>
             {trains.map(function(value, index) {
               return (
-                <tr key={index}>
+                <tr key={(index = index + 1)}>
                   <td>{index}</td>
                   <td>{value.name}</td>
                   <td>{value.category}</td>
@@ -60,7 +58,7 @@ class TrainsList extends Component {
             })}
           </tbody>
         </table>
-        <div className="clearfix">
+        {/* <div className="clearfix">
           <div className="hint-text">
             Showing <b>5</b> out of <b>25</b> entries
           </div>
@@ -99,7 +97,7 @@ class TrainsList extends Component {
               </a>
             </li>
           </ul>
-        </div>
+        </div> */}
       </div>
     );
   }

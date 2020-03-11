@@ -1,50 +1,57 @@
 import React, { Component } from "react";
-import { Button, Modal, Form } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
-class RegisterModal extends Component {
+import { actionCheckAuth, actionRegister } from "../../_actions/Auth";
+import { actionMyProfile } from "../../_actions/Profile";
+
+import { Button, Modal, Form, Alert, Spinner } from "react-bootstrap";
+
+class RegisterForm extends Component {
   constructor(props) {
     super(props);
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.state = {
       name: "",
       username: "",
       email: "",
       password: "",
-      gender: "",
+      gender: "Male",
       phone: "",
       address: "",
       login: false
     };
-
-    this.loginClose = this.loginClose.bind(this);
-    this.loginShow = this.loginShow.bind(this);
   }
-  loginClose() {
+  componentDidMount = () => {
+    this.props.actionCheckAuth();
+  };
+  loginClose = () => {
     this.setState({
       login: false
     });
-  }
+  };
 
-  loginShow() {
+  loginShow = () => {
     this.setState({
       login: true
     });
-  }
+  };
 
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  // on form submit...
-  handleFormSubmit(e) {
+  handleFormSubmit = async e => {
     e.preventDefault();
-    localStorage.setItem("loginForm", JSON.stringify(this.state));
-    this.props.history.push("/dashboard");
-  }
+    console.log(this.state);
+    await this.props.actionRegister(this.state);
+    if (this.props.auth.authentication) {
+      this.loginClose();
+      await this.props.actionCheckAuth();
+      await this.props.actionMyProfile();
+    }
+  };
+
   render() {
+    const { loading, message, message_status } = this.props.auth;
     return (
       <>
         <Modal
@@ -52,10 +59,15 @@ class RegisterModal extends Component {
           onHide={this.loginClose}
           animation={false}
         >
-          <Modal.Title id="txt-form">
+          <Modal.Title id="txt-form" className="modal-title">
             <h2>Sign Up</h2>
           </Modal.Title>
           <Modal.Body>
+            {message ? (
+              <Alert variant={message_status}>{message}</Alert>
+            ) : (
+              <></>
+            )}
             <Form onSubmit={this.handleFormSubmit}>
               <Form.Group className="form-group">
                 <Form.Label>Name</Form.Label>
@@ -99,13 +111,16 @@ class RegisterModal extends Component {
               </Form.Group>
               <Form.Group className="form-group">
                 <Form.Label>Gender</Form.Label>
-                {/* <Form.Control
-                  type="text"
-                  name="email"
+                <Form.Control
+                  as="select"
+                  name="gender"
                   className="form-control"
-                  value={this.state.email}
+                  value={this.state.gender}
                   onChange={this.handleChange}
-                /> */}
+                >
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </Form.Control>
               </Form.Group>
               <Form.Group className="form-group">
                 <Form.Label>Phone</Form.Label>
@@ -127,9 +142,15 @@ class RegisterModal extends Component {
                   onChange={this.handleChange}
                 />
               </Form.Group>
-              <Button type="submit" className="btn btn-primary btn-block">
-                Sign Up
-              </Button>
+              {loading ? (
+                <Button className="btn btn-primary btn-block" disabled>
+                  <Spinner animation="border" size="sm" variant="light" />
+                </Button>
+              ) : (
+                <Button type="submit" className="btn btn-primary btn-block">
+                  Sign Up
+                </Button>
+              )}
             </Form>
           </Modal.Body>
           <Button id="btn-false" variant="secondary" onClick={this.loginClose}>
@@ -144,5 +165,23 @@ class RegisterModal extends Component {
     );
   }
 }
+const mapStateToProps = state => {
+  return {
+    auth: state.auth,
+    profile: state.profile
+  };
+};
 
+function mapDispatchToProps(dispatch) {
+  return {
+    actionRegister: data => dispatch(actionRegister(data)),
+    actionCheckAuth: () => dispatch(actionCheckAuth()),
+    actionMyProfile: () => dispatch(actionMyProfile())
+  };
+}
+
+const RegisterModal = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(RegisterForm);
 export default RegisterModal;

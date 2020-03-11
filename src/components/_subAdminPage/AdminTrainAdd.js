@@ -15,7 +15,9 @@ class TrainAdd extends Component {
       seats: 50
     };
   }
-  componentDidMount = () => {};
+  componentDidMount = () => {
+    //Apa ya
+  };
 
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });

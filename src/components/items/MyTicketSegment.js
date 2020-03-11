@@ -1,17 +1,14 @@
 import React, { Component } from "react";
-import {
-  Container,
-  Row,
-  Col,
-  Card,
-  Badge,
-  Table,
-  Button,
-  Image
-} from "react-bootstrap";
+import { Row, Col, Card, Badge, Table, Image } from "react-bootstrap";
 import ModalPayNow from "./ModalPayNow";
 class MyTicket extends Component {
   render() {
+    console.log(this.props.data);
+    const { date, status, user, route, identity } = this.props.data;
+    const { start_time, arrived, train, start, dest } = route;
+    const { name: train_name, category: train_category } = train;
+    const { name: start_name, code: start_code, area: start_area } = start;
+    const { name: dest_name, code: dest_code, area: dest_area } = dest;
     return (
       <Col md lg="12">
         <Card>
@@ -19,38 +16,53 @@ class MyTicket extends Component {
             <Row>
               <Col md lg="8">
                 <Row>
-                  <Col md lg="3">
-                    <h3>Argo Wilis</h3>
+                  <Col md lg="4">
+                    <h3>{train_name}</h3>
                     <br />
-                    <h6>Eksekutif (P)</h6>
+                    <h6>{train_category}</h6>
                     <br />
-                    <Badge variant="warning">Pending</Badge>
+                    {status === "pending" ? (
+                      <Badge variant="warning">{status}</Badge>
+                    ) : status === "unpaid" ? (
+                      <Badge variant="danger">{status}</Badge>
+                    ) : (
+                      <Badge variant="success">{status}</Badge>
+                    )}
+                    <br />
                   </Col>
-                  <Col md lg="3">
-                    <h3>Argo Wilis</h3>
+                  <Col md lg="4">
+                    <h3>
+                      {start_name} ({start_code})
+                    </h3>
                     <br />
-                    <h6>Eksekutif (P)</h6>
+                    <h6>{start_area}</h6>
                     <br />
-                    <h3>Argo Wilis</h3>
+                    <h6>{start_time}</h6>
                     <br />
-                    <h6>Eksekutif (P)</h6>
                   </Col>
-                  <Col md lg="6 ">
-                    <h3>Argo Wilis</h3>
+                  <Col md lg="4">
+                    <h3>
+                      {dest_name} ({dest_code})
+                    </h3>
                     <br />
-                    <h6>Eksekutif (P)</h6>
+                    <h6>{dest_area}</h6>
                     <br />
-                    <h3>Argo Wilis</h3>
+                    <h6>{arrived}</h6>
                     <br />
-                    <h6>Eksekutif (P)</h6>
                   </Col>
                 </Row>
               </Col>
-              <Col md lg="4" className="myticket-title">
+              <Col md lg="3" className="myticket-title">
                 <h3>Train</h3>
                 <small>
-                  <b>Saturday, February 21 2020</b>
+                  <b>{date}</b>
                 </small>
+                <br />
+                <Image
+                  className="barcode-myticket"
+                  src="https://miro.medium.com/max/1424/1*sHmqYIYMV_C3TUhucHrT4w.png"
+                  thumbnail
+                />
               </Col>
               <Col md lg="12">
                 <Row>
@@ -58,19 +70,23 @@ class MyTicket extends Component {
                     <Table responsive="sm">
                       <thead>
                         <tr>
-                          <th>No Identity</th>
+                          <th>#</th>
+                          <th>Type ID</th>
+                          <th>Identity</th>
                           <th>Name</th>
-                          <th>Phone</th>
-                          <th>Email</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>21331981389</td>
-                          <td>Joko</td>
-                          <td>085777899</td>
-                          <td>joko@email.com</td>
-                        </tr>
+                        {identity.map(function(value, index) {
+                          return (
+                            <tr key={(index = index + 1)}>
+                              <td>{index}</td>
+                              <td>{value.category}</td>
+                              <td>{value.identity}</td>
+                              <td>{value.name}</td>
+                            </tr>
+                          );
+                        })}
                       </tbody>
                     </Table>
                   </Col>
@@ -86,4 +102,5 @@ class MyTicket extends Component {
     );
   }
 }
+
 export default MyTicket;

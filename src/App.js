@@ -25,16 +25,11 @@ import AdminDashboard from "./components/_subAdminPage/AdminDashboard";
 import AdminOrdersList from "./components/_subAdminPage/AdminOrdersList";
 import AdminStationsList from "./components/_subAdminPage/AdminStationsList";
 import AdminStationAdd from "./components/_subAdminPage/AdminStationAdd";
-import AdminStationUpdate from "./components/_subAdminPage/AdminStationUpdate";
 import AdminTrainsList from "./components/_subAdminPage/AdminTrainsList";
 import AdminTrainAdd from "./components/_subAdminPage/AdminTrainAdd";
-import AdminTrainUpdate from "./components/_subAdminPage/AdminTrainUpdate";
 import AdminRoutesList from "./components/_subAdminPage/AdminRoutesList";
 import AdminRouteAdd from "./components/_subAdminPage/AdminRouteAdd";
-import AdminRouteUpdate from "./components/_subAdminPage/AdminRouteUpdate";
 import AdminUsersList from "./components/_subAdminPage/AdminUsersList";
-import AdminUserAdd from "./components/_subAdminPage/AdminUserAdd";
-import AdminUserUpdate from "./components/_subAdminPage/AdminUserUpdate";
 
 class Index extends Component {
   componentDidMount = async () => {
@@ -89,21 +84,9 @@ class Index extends Component {
                 </Col>
                 <Col sm={9}>
                   <Switch>
-                    <Route path="/admin/user-update">
-                      {/* {auth ? <AdminUserUpdate /> : <Redirect to="/" />} */}
-                      <AdminUserUpdate />
-                    </Route>
-                    <Route path="/admin/user-add">
-                      {/* {auth ? <AdminUserAdd /> : <Redirect to="/" />} */}
-                      <AdminUserAdd />
-                    </Route>
                     <Route path="/admin/users">
                       {/* {auth ? <AdminUsersList /> : <Redirect to="/" />} */}
                       <AdminUsersList />
-                    </Route>
-                    <Route path="/admin/route-update">
-                      {/* {auth ? <AdminRouteUpdate /> : <Redirect to="/" />} */}
-                      <AdminRouteUpdate />
                     </Route>
                     <Route path="/admin/route-add">
                       {/* {auth ? <AdminRouteAdd /> : <Redirect to="/" />} */}
@@ -113,10 +96,6 @@ class Index extends Component {
                       {/* {auth ? <AdminRoutesList /> : <Redirect to="/" />} */}
                       <AdminRoutesList />
                     </Route>
-                    <Route path="/admin/train-update">
-                      {/* {auth ? <AdminTrainUpdate /> : <Redirect to="/" />} */}
-                      <AdminTrainUpdate />
-                    </Route>
                     <Route path="/admin/train-add">
                       {/* {auth ? <AdminTrainAdd /> : <Redirect to="/" />} */}
                       <AdminTrainAdd />
@@ -124,10 +103,6 @@ class Index extends Component {
                     <Route path="/admin/trains">
                       {/* {auth ? <AdminTrainsList /> : <Redirect to="/" />} */}
                       <AdminTrainsList />
-                    </Route>
-                    <Route path="/admin/station-update">
-                      {/* {auth ? <AdminStationUpdate /> : <Redirect to="/" />} */}
-                      <AdminStationUpdate />
                     </Route>
                     <Route path="/admin/station-add">
                       {/* {auth ? <AdminStationAdd /> : <Redirect to="/" />} */}

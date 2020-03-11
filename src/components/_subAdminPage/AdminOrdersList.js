@@ -37,7 +37,7 @@ class OrdersList extends Component {
           <tbody>
             {transactions.map(function(value, index) {
               return (
-                <tr key={index}>
+                <tr key={(index = index + 1)}>
                   <td>{index}</td>
                   <td>{value.user.name}</td>
                   <td>{value.date}</td>

@@ -1,4 +1,9 @@
-import { AUTH_LOGIN, AUTH_STATUS, AUTH_LOGOUT } from "../config/Constants";
+import {
+  AUTH_LOGIN,
+  AUTH_REGISTER,
+  AUTH_STATUS,
+  AUTH_LOGOUT
+} from "../config/Constants";
 import { API } from "../config/Api";
 
 export const actionCheckAuth = () => {
@@ -20,6 +25,15 @@ export const actionLogin = data => {
     type: AUTH_LOGIN,
     payload: async () => {
       const res = await API.post("/auth/login", data);
+      return res.data;
+    }
+  };
+};
+export const actionRegister = data => {
+  return {
+    type: AUTH_REGISTER,
+    payload: async () => {
+      const res = await API.post("/auth/register", data);
       return res.data;
     }
   };

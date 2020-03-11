@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { BrowserRouter as Switch, Link } from "react-router-dom";
-
 import { Button } from "react-bootstrap";
 
 import { actionGetUsers } from "../../_actions/User";
@@ -24,12 +22,6 @@ class UsersList extends Component {
                 Users <b>List</b>
               </h2>
             </div>
-            <div className="col-sm-7">
-              <Switch></Switch>
-              <Link to="/admin/user-add" className="btn btn-primary">
-                <span>Add User</span>
-              </Link>
-            </div>
           </div>
         </div>
         <table className="table table-striped table-hover">
@@ -40,13 +32,13 @@ class UsersList extends Component {
               <th>Email</th>
               <th>Gender</th>
               <th>Status</th>
-              <th>Action</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
             {users.map(function(value, index) {
               return (
-                <tr key={index}>
+                <tr key={(index = index + 1)}>
                   <td>{index}</td>
                   <td>{value.name}</td>
                   <td>{value.email}</td>
@@ -69,7 +61,7 @@ class UsersList extends Component {
             })}
           </tbody>
         </table>
-        <div className="clearfix">
+        {/* <div className="clearfix">
           <div className="hint-text">
             Showing <b>5</b> out of <b>25</b> entries
           </div>
@@ -108,7 +100,7 @@ class UsersList extends Component {
               </a>
             </li>
           </ul>
-        </div>
+        </div> */}
       </div>
     );
   }
