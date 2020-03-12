@@ -70,9 +70,9 @@ class Navigation extends Component {
                     <Link to="/my-tickets" className="dropdown-item">
                       My Tickets
                     </Link>
-                    <Link to="/invoice" className="dropdown-item">
+                    {/* <Link to="/invoice" className="dropdown-item">
                       Invoice
-                    </Link>
+                    </Link> */}
                     {this.props.profile.myprofile &&
                     this.props.profile.myprofile.data.level === "admin" ? (
                       <Link to="/admin" className="dropdown-item">

@@ -141,7 +141,7 @@ class Search extends Component {
                             </Col>
                             <Col md lg="12">
                               <Row className="justify-content-md-center">
-                                <Col md lg="12">
+                                {/* <Col md lg="12">
                                   <Form.Check
                                     type="switch"
                                     id="status_return"
@@ -153,7 +153,7 @@ class Search extends Component {
                                       })
                                     }
                                   />
-                                </Col>
+                                </Col> */}
                                 <Col md lg="6">
                                   <Row>
                                     <Col md lg="6">

@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { Row, Col, Card, Badge, Table, Image } from "react-bootstrap";
+import QRCODE from "qrcode.react";
 import ModalPayNow from "./ModalPayNow";
 class MyTicket extends Component {
   render() {
     console.log(this.props.data);
-    const { date, status, user, route, identity } = this.props.data;
+    const { id, date, status, user, route, identity } = this.props.data;
     const { start_time, arrived, train, start, dest } = route;
     const { name: train_name, category: train_category } = train;
     const { name: start_name, code: start_code, area: start_area } = start;
@@ -14,7 +15,7 @@ class MyTicket extends Component {
         <Card>
           <div className="ticket-frame">
             <Row>
-              <Col md lg="8">
+              <Col md lg="9">
                 <Row>
                   <Col md lg="4">
                     <h3>{train_name}</h3>
@@ -58,10 +59,11 @@ class MyTicket extends Component {
                   <b>{date}</b>
                 </small>
                 <br />
-                <Image
+                <QRCODE
+                  id={id}
+                  value={id}
+                  size={100}
                   className="barcode-myticket"
-                  src="https://miro.medium.com/max/1424/1*sHmqYIYMV_C3TUhucHrT4w.png"
-                  thumbnail
                 />
               </Col>
               <Col md lg="12">
@@ -91,7 +93,7 @@ class MyTicket extends Component {
                     </Table>
                   </Col>
                   <Col md lg="2">
-                    <ModalPayNow />
+                    <ModalPayNow data={id} />
                   </Col>
                 </Row>
               </Col>

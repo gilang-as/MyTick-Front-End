@@ -8,7 +8,8 @@ import {
   Switch,
   Route,
   Link,
-  Redirect
+  Redirect,
+  useParams
 } from "react-router-dom";
 import { Container, Nav, Col, Row } from "react-bootstrap";
 
@@ -126,9 +127,9 @@ class Index extends Component {
             </Container>
             {/* <Admin /> */}
           </Route>
-          <Route path="/invoice">
-            {auth ? <Invoice /> : <Redirect to="/" />}
-          </Route>
+          {/* <Route path="/invoice/:id">
+            {auth ? <InvoicePage /> : <Redirect to="/" />}
+          </Route> */}
           <Route path="/my-tickets">
             {auth ? <MyTicket /> : <Redirect to="/" />}
           </Route>
